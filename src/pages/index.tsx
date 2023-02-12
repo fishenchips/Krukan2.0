@@ -1,10 +1,10 @@
-import { useSession, signIn, signOut } from "next-auth/react";
-import useRouter from "next/router";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const Home = () => {
   const { data: session } = useSession();
 
-  const { push } = useRouter();
+  const { push, asPath } = useRouter();
 
   console.log(session);
 
@@ -12,6 +12,10 @@ const Home = () => {
     const data = await signOut({ redirect: false, callbackUrl: "/logged-out" });
 
     push(data.url);
+  };
+
+  const handleSignIn = () => {
+    push(`/auth/signin?callbackUrl=${asPath}`);
   };
 
   return (
@@ -24,7 +28,7 @@ const Home = () => {
         </>
       ) : (
         <>
-          <button onClick={signIn}>Sign in</button>
+          <button onClick={handleSignIn}>Sign in</button>
         </>
       )}
     </div>
