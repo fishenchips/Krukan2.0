@@ -4,8 +4,7 @@ const SignInPage: NextPage = () => {
   return (
     <div>
       <form>
-        <input type="text" name="email" id="" />
-        <input type="password" name="password" id="" />
+        <input type="text" name="email" id="email" placeholder="email" />
         <input type="submit" value="Log in" />
       </form>
     </div>
