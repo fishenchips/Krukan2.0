@@ -1,4 +1,4 @@
-import { Match } from "./types";
+import type { Match } from "./types";
 
 export const createMatch = async (enteredMatchData: Match) => {
   const response = await fetch("/api/admin/post-match", {
