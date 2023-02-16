@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { MongoClient } from "mongodb";
 
 type Data = {
-  match: any; // for now
+  data: any; // for now
   message: string;
 };
 
@@ -16,13 +16,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     const matchesCollection = db.collection("matches");
 
-    const matches = await matchesCollection.insertOne(data);
+    const match = await matchesCollection.insertOne(data);
 
-    console.log(matches);
+    console.log(match);
 
     client.close();
 
-    res.status(201).json({ message: "Match created.", match: data });
+    res.status(201).json({ message: "Match created.", data });
 
     return data;
   }
