@@ -25,7 +25,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       email: session?.user?.email,
     });
 
-    console.log(DBUser);
+    /* need to create get request for user and find by email, and then we can add to correct ID */
+
+    const update = await usersCollection.updateOne(DBUser, data);
+
+    console.log(update);
 
     client.close();
 
