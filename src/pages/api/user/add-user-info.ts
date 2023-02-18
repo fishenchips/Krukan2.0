@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { getSession } from "next-auth/react";
 
 import { PlayerInfo } from "@/utils/types/playerInfo";
@@ -25,11 +25,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       email: session?.user?.email,
     });
 
-    /* need to create get request for user and find by email, and then we can add to correct ID */
+    console.log(DBUser);
 
-    const update = await usersCollection.updateOne(DBUser, data);
-
-    console.log(update);
+    const update = await usersCollection.updateOne(
+      { _id: DBUser?._id },
+      { $set: { info: data } }
+    );
 
     client.close();
 
