@@ -5,15 +5,15 @@ import { getSession } from "next-auth/react";
 import { PlayerInfo } from "@/utils/types/playerInfo";
 
 type Data = {
-  data: PlayerInfo;
-  message: string;
+  data?: PlayerInfo;
+  message?: string;
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
-  if (req.method === "PATCH") {
+  if (req.method === "GET") {
     const session = await getSession({ req });
 
-    const data = req.body;
+    /* const data = req.body; */
 
     const client = await MongoClient.connect(process.env.MONGODB_URI as string);
 
@@ -25,18 +25,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       email: session?.user?.email,
     });
 
-    console.log(DBUser);
-
-    const update = await usersCollection.updateOne(
-      { _id: DBUser?._id },
-      { $set: { info: data } }
-    );
-
     client.close();
 
-    res.status(200).json({ message: "User info added.", data });
+    console.log(DBUser);
 
-    return data;
+    if (!DBUser) {
+      res.status(404).json({ message: "User not found." });
+    }
+
+    res.status(200).json(DBUser);
+
+    return DBUser;
   }
 };
 

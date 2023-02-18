@@ -1,8 +1,12 @@
 import { useAddUserInfo } from "@/queries/users/hooks/useAddUserInfo";
+import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import { positions } from "@/utils/positions";
 import { SyntheticEvent, useRef } from "react";
+import { useSession } from "next-auth/react";
 
 export const UserLandingPage = () => {
+  const { data: session } = useSession();
+
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const positionRef = useRef<HTMLSelectElement>(null);
@@ -11,14 +15,15 @@ export const UserLandingPage = () => {
   const enteredLastName = lastNameRef.current?.value;
   const enteredPosition = positionRef.current?.value;
 
-  console.log(enteredFirstName);
-
   const userData = {
     firstName: enteredFirstName,
     lastName: enteredLastName,
     position: enteredPosition,
   };
 
+  const { data: loggedInUser } = useGetLoggedInUser(
+    session?.user?.email as string
+  );
   const { mutate } = useAddUserInfo(userData);
 
   const handlePatchUser = async (e: SyntheticEvent) => {
@@ -27,6 +32,16 @@ export const UserLandingPage = () => {
     console.log(userData);
     mutate();
   };
+  console.log({ loggedInUser });
+  console.log({ session });
+
+  if (loggedInUser) {
+    return (
+      <>
+        <p>Welcome back {loggedInUser.info.firstName}.</p>
+      </>
+    );
+  }
 
   return (
     <div>
