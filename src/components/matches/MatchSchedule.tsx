@@ -20,7 +20,7 @@ export const MatchSchedule = () => {
           >
             {match.home
               ? `FC Krukan - ${match.opposition} (H)`
-              : `${match.opposition} - FC Krukan (A)`}{" "}
+              : `${match.opposition} - FC Krukan (A)`}
           </h4>
           <p>Date: {match.date}</p>
           <p>At {match.arena}</p>
