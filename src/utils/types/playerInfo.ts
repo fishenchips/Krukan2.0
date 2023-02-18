@@ -1,3 +1,10 @@
+export type Player = {
+  _id: string;
+  email: string;
+  emailVerified: string;
+  info: PlayerInfo;
+};
+
 export type PlayerInfo = {
   firstName?: string;
   lastName?: string;

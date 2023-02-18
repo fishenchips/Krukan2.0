@@ -1,6 +1,6 @@
-import { PlayerInfo } from "@/utils/types/playerInfo";
+import { Player, PlayerInfo } from "@/utils/types/playerInfo";
 
-export const getLoggedInUser = async (email: string) => {
+export const getLoggedInUser = async (email: string): Promise<Player> => {
   const response = await fetch(`/api/user/get-user/${email}`);
 
   return response.json();
