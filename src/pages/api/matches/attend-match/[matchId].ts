@@ -30,7 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     const update = await matchesCollection.updateOne(
       { _id: DBmatch?._id },
-      { $set: { info: data } }
+      { $set: { roster: data. } }
     );
 
     client.close();
