@@ -13,8 +13,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   if (req.method === "GET") {
     const session = await getSession({ req });
 
-    /* const data = req.body; */
-
     const client = await MongoClient.connect(process.env.MONGODB_URI as string);
 
     const db = client.db();
@@ -33,7 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
       res.status(404).json({ message: "User not found." });
     }
 
-    res.status(200).json(DBUser);
+    res.status(200).json({ message: "User found", data: DBUser as PlayerInfo });
 
     return DBUser;
   }
