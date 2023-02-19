@@ -4,7 +4,7 @@ import type { Match } from "./types";
 export const createMatch = async (enteredMatchData: Match) => {
   const response = await fetch("/api/admin/post-match", {
     method: "POST",
-    body: JSON.stringify(enteredMatchData),
+    body: JSON.stringify({ enteredMatchData }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -13,10 +13,10 @@ export const createMatch = async (enteredMatchData: Match) => {
   return response.json();
 };
 
-export const attendMatchById = async (player: Player, match: Match) => {
-  const response = await fetch(`/api/matches/attend-match/${match._id}`, {
+export const attendMatchById = async (playerData: Player, matchId: string) => {
+  const response = await fetch(`/api/matches/attend-match/${matchId}`, {
     method: "PATCH",
-    body: JSON.stringify(player),
+    body: JSON.stringify({ playerData, matchId }),
     headers: {
       "Content-Type": "application/json",
     },

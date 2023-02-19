@@ -32,7 +32,7 @@ export const MatchSchedule = () => {
 
 const DUMMY_MATCHES = [
   {
-    id: 1,
+    id: "63ee9b67445d9024cbd0024d",
     home: false,
     arena: "zinken",
     date: "23-03-16, 16:00",
