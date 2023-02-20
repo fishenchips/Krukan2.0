@@ -17,7 +17,7 @@ export const UserLandingPage = () => {
   if (loggedInUser) {
     return (
       <>
-        <p>Welcome back {loggedInUser.data.info.firstName}.</p>
+        <p>Welcome back {loggedInUser.info.firstName}.</p>
       </>
     );
   }

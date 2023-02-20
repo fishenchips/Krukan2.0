@@ -1,0 +1,13 @@
+.project {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Verdana, sans-serif;
+}
+
+.main {
+  width: 90%;
+  min-height: 50vh;
+  margin: 3rem auto;
+  padding: 1rem;
+}
