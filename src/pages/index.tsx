@@ -1,3 +1,4 @@
+import { UserLandingPage } from "@/components/users/UserLandingPage";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -23,8 +24,8 @@ const Home = () => {
       <p>allo</p>
       {session ? (
         <>
-          <p>Session exists</p>
           <button onClick={handleSignOut}>Sign out</button>
+          <UserLandingPage />
         </>
       ) : (
         <>
