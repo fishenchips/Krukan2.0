@@ -1,8 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { MongoClient, ObjectId } from "mongodb";
-import { getSession } from "next-auth/react";
-
-import { Match } from "@/queries/matches/types";
 
 type Data = {
   data: any;
