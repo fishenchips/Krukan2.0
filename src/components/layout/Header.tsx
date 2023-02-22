@@ -14,7 +14,13 @@ export const Header = () => {
         <h3>FC Krukan - Lirarnas Lag </h3>
       </div>
       <div className={styles.userHub}>
-        {session ? <SignOutButton /> : <SignInButton />}
+        {status === "loading" ? (
+          <p></p>
+        ) : session ? (
+          <SignOutButton />
+        ) : (
+          <SignInButton />
+        )}
       </div>
     </header>
   );
