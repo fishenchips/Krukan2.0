@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
-import { useToast } from "@chakra-ui/toast";
+import { useToast } from "@chakra-ui/react";
 
 export const SignInButton = () => {
   const { push, asPath } = useRouter();
