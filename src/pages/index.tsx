@@ -21,7 +21,6 @@ const Home = () => {
 
   return (
     <div>
-      <p>allo</p>
       {session ? (
         <>
           <button onClick={handleSignOut}>Sign out</button>

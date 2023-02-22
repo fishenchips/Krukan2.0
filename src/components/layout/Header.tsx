@@ -3,8 +3,10 @@ import styles from "./Header.module.css";
 export const Header = () => {
   return (
     <header className={styles.header}>
-      test
-      <div>test2</div>
+      <div>
+        <h3>FC Krukan</h3>
+      </div>
+      <div></div>
     </header>
   );
 };
