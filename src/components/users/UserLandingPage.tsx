@@ -14,6 +14,10 @@ export const UserLandingPage = () => {
 
   if (isLoading) return <p>Loading..</p>;
 
+  if (!session) {
+    return <p>welcome</p>;
+  }
+
   if (loggedInUser) {
     return (
       <>
