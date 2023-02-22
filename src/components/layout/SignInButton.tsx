@@ -10,8 +10,8 @@ export const SignInButton = () => {
   };
   return (
     <div onClick={handleSignIn}>
-      <span>Log in</span>
       <FontAwesomeIcon icon={faUser} />
+      <span>Log in</span>
     </div>
   );
 };

@@ -1,19 +1,10 @@
 import styles from "./Header.module.css";
-import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import { SignInButton } from "./SignInButton";
+import { SignOutButton } from "./SignOutButton";
 
 export const Header = () => {
   const { data: session } = useSession();
-  const { push } = useRouter();
-
-  console.log(session);
-
-  const handleSignOut = async () => {
-    const data = await signOut({ redirect: false, callbackUrl: "/logged-out" });
-
-    push(data.url);
-  };
 
   return (
     <header className={styles.header}>
@@ -21,11 +12,7 @@ export const Header = () => {
         <h3>FC Krukan</h3>
       </div>
       <div className={styles.userHub}>
-        {session ? (
-          <button onClick={handleSignOut}>Sign out</button>
-        ) : (
-          <SignInButton />
-        )}
+        {session ? <SignOutButton /> : <SignInButton />}
       </div>
     </header>
   );
