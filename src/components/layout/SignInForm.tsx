@@ -27,12 +27,12 @@ export const SignInForm = () => {
         description:
           "We have sent you an e-mail. Please follow the instructions in the e-mail to log in.",
         status: "info",
-        duration: 9000,
+        duration: 15000,
       });
     }
   };
 
-  if (status === "loading") return <p>loading</p>;
+  if (status === "loading") return <p>Loading..</p>;
 
   if (session) {
     push("/");
