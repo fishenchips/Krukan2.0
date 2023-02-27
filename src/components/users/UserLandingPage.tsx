@@ -14,10 +14,14 @@ export const UserLandingPage = () => {
 
   if (isLoading) return <p>Loading..</p>;
 
+  if (!session) {
+    return <p>welcome</p>;
+  }
+
   if (loggedInUser) {
     return (
       <>
-        <p>Welcome back {loggedInUser.data.info.firstName}.</p>
+        <p>Welcome back {loggedInUser.info.firstName}.</p>
       </>
     );
   }
