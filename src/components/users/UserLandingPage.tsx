@@ -1,6 +1,8 @@
 import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import { useSession } from "next-auth/react";
+import { Loading } from "../layout/Loading";
 import { UserInfoForm } from "./UserInfoForm";
+import styles from "./UserLandingPage.module.css";
 
 export const UserLandingPage = () => {
   const { data: session } = useSession();
@@ -9,25 +11,32 @@ export const UserLandingPage = () => {
     session?.user?.email as string
   );
 
-  console.log({ loggedInUser }, "user");
-  console.log({ session });
-
-  if (isLoading) return <p>Loading..</p>;
+  if (isLoading) return <Loading />;
 
   if (!session) {
-    return <p>Welcome</p>;
+    return (
+      <div>
+        <p className={styles.welcomeMsg}>Welcome to Krukan 2.0!</p>
+        <p>
+          Please log in by pressing the log in button. Enter your e-mail and
+          open your inbox.
+        </p>
+      </div>
+    );
   }
 
   return (
     <div>
       {loggedInUser && (
         <>
-          <p>Welcome back {loggedInUser.info.firstName}.</p>
+          <p className={styles.welcomeMsg}>
+            Welcome back {loggedInUser.info.firstName}.
+          </p>
           {Object.hasOwn(loggedInUser, "info") ? (
             ""
           ) : (
             <>
-              <h4>Please Provide us with some info about yourself!</h4>
+              <p>Please Provide us with some info about yourself!</p>
               <UserInfoForm />
             </>
           )}
