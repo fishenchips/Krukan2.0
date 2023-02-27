@@ -15,7 +15,7 @@ export const Header = () => {
       </div>
       <div className={styles.userHub}>
         {status === "loading" ? (
-          <p></p>
+          ""
         ) : session ? (
           <SignOutButton />
         ) : (
