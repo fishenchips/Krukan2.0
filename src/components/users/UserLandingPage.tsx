@@ -15,23 +15,22 @@ export const UserLandingPage = () => {
   if (isLoading) return <p>Loading..</p>;
 
   if (!session) {
-    return <p>welcome</p>;
-  }
-
-  if (loggedInUser) {
-    return (
-      <>
-        <p>Welcome back {loggedInUser.info.firstName}.</p>
-      </>
-    );
+    return <p>Welcome</p>;
   }
 
   return (
     <div>
-      {session && (
+      {loggedInUser && (
         <>
-          <h4>Please Provide us with some info about yourself!</h4>
-          <UserInfoForm />
+          <p>Welcome back {loggedInUser.info.firstName}.</p>
+          {Object.hasOwn(loggedInUser, "info") ? (
+            ""
+          ) : (
+            <>
+              <h4>Please Provide us with some info about yourself!</h4>
+              <UserInfoForm />
+            </>
+          )}
         </>
       )}
     </div>

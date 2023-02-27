@@ -2,14 +2,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { MongoClient } from "mongodb";
 import { getSession } from "next-auth/react";
 
-import { PlayerInfo } from "@/utils/types/playerInfo";
-
-type Data = {
-  data?: PlayerInfo;
-  message?: string;
-};
-
-const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     const session = await getSession({ req });
 
@@ -24,8 +17,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     });
 
     client.close();
-
-    console.log(DBUser);
 
     if (!DBUser) {
       res.status(404).json({ message: "User not found." });
