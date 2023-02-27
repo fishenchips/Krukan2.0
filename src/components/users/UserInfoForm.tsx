@@ -39,7 +39,7 @@ export const UserInfoForm = () => {
         <label htmlFor="position">Preferred position</label>
         <select name="position" defaultValue="" ref={positionRef}>
           <option value="" disabled>
-            --Select your position--
+            --select your position--
           </option>
           {positions.map((position) => (
             <option value={position} key={position}>
