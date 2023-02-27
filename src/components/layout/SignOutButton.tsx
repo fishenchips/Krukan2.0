@@ -9,7 +9,7 @@ export const SignOutButton = () => {
   const toast = useToast();
 
   const handleSignOut = async () => {
-    const data = await signOut({ redirect: false, callbackUrl: "/logged-out" });
+    const data = await signOut({ redirect: false, callbackUrl: "/" });
 
     push(data.url);
     toast({
