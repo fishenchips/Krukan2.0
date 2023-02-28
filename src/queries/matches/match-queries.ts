@@ -24,3 +24,9 @@ export const attendMatchById = async (playerData: Player, matchId: string) => {
 
   return response.json();
 };
+
+export const getMatches = async (): Promise<Array<Match>> => {
+  const response = await fetch("/api/matches/get-matches");
+
+  return response.json();
+};

@@ -1,7 +1,12 @@
+import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
 import { useRouter } from "next/router";
 
 export const MatchSchedule = () => {
   const { push } = useRouter();
+
+  const { data } = useGetMatches();
+
+  console.log(data);
 
   return (
     <div>
