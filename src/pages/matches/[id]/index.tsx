@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 
+/* Error when reloading page, test getStaticProps / staticPaths */
+
 const MatchPage = () => {
   const { query } = useRouter();
   const { data: session } = useSession();

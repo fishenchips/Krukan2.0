@@ -3,6 +3,7 @@ export type Match = {
   opposition: string;
   arena: string;
   date: string;
+  time: string;
   gameType: string;
   home: boolean;
 };
