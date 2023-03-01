@@ -4,22 +4,22 @@ import { useRouter } from "next/router";
 export const MatchSchedule = () => {
   const { push } = useRouter();
 
-  const { data } = useGetMatches();
+  const { data: matches } = useGetMatches();
 
-  console.log(data);
+  console.log(matches);
 
   return (
     <div>
-      {DUMMY_MATCHES.map((match) => (
-        <div key={match.id}>
+      {matches?.map((match) => (
+        <div key={match._id}>
           <h4
             onClick={() =>
               push(
                 {
-                  pathname: `/matches/${match.id}`,
+                  pathname: `/matches/${match._id}`,
                   query: { match: JSON.stringify(match) },
                 },
-                `/matches/${match.id}`
+                `/matches/${match._id}`
               )
             }
           >
@@ -27,46 +27,11 @@ export const MatchSchedule = () => {
               ? `FC Krukan - ${match.opposition} (H)`
               : `${match.opposition} - FC Krukan (A)`}
           </h4>
-          <p>Date: {match.date}</p>
-          <p>At {match.arena}</p>
+          <p>
+            {match.date} <time>{match.time}</time>, {match.arena}
+          </p>
         </div>
       ))}
     </div>
   );
 };
-
-const DUMMY_MATCHES = [
-  {
-    id: "63ee9b67445d9024cbd0024d",
-    home: false,
-    arena: "zinken",
-    date: "23-03-16, 16:00",
-    gameType: "friendly",
-    opposition: "Stureby",
-  },
-  {
-    id: 2,
-    home: true,
-    arena: "zinken",
-    date: "23-03-16, 16:00",
-    gameType: "friendly",
-    opposition: "Stureby",
-  },
-
-  {
-    id: 3,
-    home: true,
-    arena: "zinken",
-    date: "23-03-16, 16:00",
-    gameType: "friendly",
-    opposition: "Stureby",
-  },
-  {
-    id: 4,
-    home: true,
-    arena: "zinken",
-    date: "23-03-16, 16:00",
-    gameType: "friendly",
-    opposition: "Stureby",
-  },
-];
