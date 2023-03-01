@@ -1,6 +1,13 @@
 import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
 import { useRouter } from "next/router";
 
+/* Todo 
+  sort by date
+  fix filtering
+  fix attending
+  mobile
+*/
+
 export const MatchSchedule = () => {
   const { push } = useRouter();
 

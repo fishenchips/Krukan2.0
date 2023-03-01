@@ -9,7 +9,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const matchesCollection = db.collection("matches");
 
-    const matches = await matchesCollection.find().toArray();
+    const matches = await matchesCollection.find().sort({ date: 1 }).toArray();
 
     client.close();
 

@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { useCreateMatch } from "@/queries/matches/hooks/useCreateMatch";
 import { Match } from "@/queries/matches/types";
+import { matchesKey } from "@/queries/matches/hooks/useGetMatches";
 
 export const NewMatchForm = () => {
   const { register, handleSubmit, watch, reset } = useForm<Match>({
@@ -40,7 +41,7 @@ export const NewMatchForm = () => {
         });
       },
       onSuccess: () => {
-        // queryClient.invalidateQueries([get-matches]);   INVALIDATE GET ALL MATCHES QUERY
+        queryClient.invalidateQueries([matchesKey]);
         toast({
           status: "success",
           title: "Match created",
