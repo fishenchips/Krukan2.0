@@ -30,3 +30,9 @@ export const getMatches = async (): Promise<Array<Match>> => {
 
   return response.json();
 };
+
+export const getMatchById = async (_id: string): Promise<Match> => {
+  const response = await fetch(`api/matches/get-match/${_id}`);
+
+  return response.json();
+};
