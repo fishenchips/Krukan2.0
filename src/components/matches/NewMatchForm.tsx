@@ -3,8 +3,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { useCreateMatch } from "@/queries/matches/hooks/useCreateMatch";
-import { Match } from "@/queries/matches/types";
 import { matchesKey } from "@/queries/matches/hooks/useGetMatches";
+import { Match } from "@/utils/types/match";
 
 export const NewMatchForm = () => {
   const { register, handleSubmit, watch, reset } = useForm<Match>({

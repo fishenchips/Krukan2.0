@@ -1,5 +1,6 @@
 import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
 import { useRouter } from "next/router";
+import { Loading } from "../layout/Loading";
 
 /* Todo 
   fix filtering
@@ -10,25 +11,17 @@ import { useRouter } from "next/router";
 export const MatchSchedule = () => {
   const { push } = useRouter();
 
-  const { data: matches } = useGetMatches();
+  const { data: matches, isLoading } = useGetMatches();
 
   console.log(matches);
+
+  if (isLoading) return <Loading />;
 
   return (
     <div>
       {matches?.map((match) => (
         <div key={match._id}>
-          <h4
-            onClick={() =>
-              push(
-                {
-                  pathname: `/matches/${match._id}`,
-                  query: { match: JSON.stringify(match) },
-                },
-                `/matches/${match._id}`
-              )
-            }
-          >
+          <h4 onClick={() => push(`/matches/${match._id}`)}>
             {match.home
               ? `FC Krukan - ${match.opposition} (H)`
               : `${match.opposition} - FC Krukan (A)`}

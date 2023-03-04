@@ -4,53 +4,67 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import { useQueryClient } from "@tanstack/react-query";
-import { matchesKey } from "@/queries/matches/hooks/useGetMatches";
-
-/* Error when reloading page, test getStaticProps / staticPaths */
+import {
+  matchKey,
+  useGetMatchById,
+} from "@/queries/matches/hooks/useGetMatchById";
+import { Loading } from "@/components/layout/Loading";
 
 const MatchPage = () => {
-  const { query } = useRouter();
+  const {
+    query: { id },
+    isReady,
+  } = useRouter();
+
   const { data: session } = useSession();
 
   const queryClient = useQueryClient();
+
+  const { data: match, isLoading } = useGetMatchById(id as string);
 
   const { data: loggedInUser } = useGetLoggedInUser(
     session?.user?.email as string
   );
 
-  const { _id, home, arena, date, gameType, opposition, roster } = JSON.parse(
-    query.match as string
+  const { mutate } = useAddPlayerToRoster(
+    loggedInUser as Player,
+    match?._id as string,
+    {
+      onSuccess: () => queryClient.invalidateQueries([matchKey, id]),
+    }
   );
-
-  const { mutate } = useAddPlayerToRoster(loggedInUser as Player, _id, {
-    onSuccess: () => queryClient.invalidateQueries([matchesKey]),
-  });
 
   const handleAttendMatch = () => {
     mutate();
-    console.log({ loggedInUser }, { _id });
+    console.log({ loggedInUser }, match?._id);
   };
+
+  if (isLoading || !isReady) return <Loading />;
+
+  if (!match) {
+    return <p>Match not found</p>;
+  }
 
   return (
     <div>
       <h4>
-        {home
-          ? `FC Krukan - ${opposition} (H)`
-          : `${opposition} - FC Krukan (A)`}
+        {match.home
+          ? `FC Krukan - ${match.opposition} (H)`
+          : `${match.opposition} - FC Krukan (A)`}
       </h4>
       <p>
-        {gameType} match at {arena}
+        {match.gameType} match at {match.arena}
       </p>
-      <p>{date}</p>
+      <p>{match.date}</p>
 
       <div>
         <button onClick={handleAttendMatch}>I can play!</button>
       </div>
 
-      {roster ? (
+      {match.roster ? (
         <div>
           <p>Players:</p>
-          {roster.map((player: Player) => (
+          {match.roster.map((player: Player) => (
             <span key={player._id}>
               {player.info.firstName} {player.info.lastName}
             </span>
@@ -64,3 +78,12 @@ const MatchPage = () => {
 };
 
 export default MatchPage;
+
+/* export const getStaticProps: GetStaticProps<{ match: Match }> = async (
+  context
+) => {
+  const matchId = context?.params?._id;
+
+  const { data } = useGetMatchById(matchId);
+};
+ */

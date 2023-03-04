@@ -3,7 +3,7 @@ import { MongoClient, ObjectId } from "mongodb";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
-    const { _id } = req.query;
+    const { id } = req.query;
 
     const client = await MongoClient.connect(process.env.MONGODB_URI as string);
 
@@ -12,7 +12,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const matchesCollection = db.collection("matches");
 
     const DBMatch = await matchesCollection.findOne({
-      _id: new ObjectId(_id as string),
+      _id: new ObjectId(id as string),
     });
 
     client.close();

@@ -1,12 +1,12 @@
 import { ApiError } from "@/utils/types/error";
+import { ScheduledMatch } from "@/utils/types/match";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { getMatches } from "../match-queries";
-import { Match } from "../types";
 
 export const matchesKey = "get-matches";
 
 export const useGetMatches = (
-  options?: UseQueryOptions<unknown, ApiError, Array<Match>>
+  options?: UseQueryOptions<unknown, ApiError, Array<ScheduledMatch>>
 ) =>
   useQuery({
     queryKey: [matchesKey],

@@ -6,11 +6,11 @@ import { Match } from "../types";
 export const matchKey = "single-match";
 
 export const useGetMatchById = (
-  _id: string,
+  id: string,
   options?: UseQueryOptions<unknown, ApiError, Match>
 ) =>
   useQuery({
-    queryKey: [matchKey, _id],
-    queryFn: () => getMatchById(_id),
+    queryKey: [matchKey, id],
+    queryFn: () => getMatchById(id),
     ...options,
   });
