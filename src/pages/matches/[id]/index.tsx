@@ -1,7 +1,5 @@
 import { Player } from "@/utils/types/playerInfo";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import { useGetMatchById } from "@/queries/matches/hooks/useGetMatchById";
 import { Loading } from "@/components/layout/Loading";
 import { AttendMatch } from "@/components/match/AttendMatch";
@@ -12,13 +10,7 @@ const MatchPage = () => {
     isReady,
   } = useRouter();
 
-  const { data: session } = useSession();
-
   const { data: match, isLoading } = useGetMatchById(id as string);
-
-  const { data: loggedInUser } = useGetLoggedInUser(
-    session?.user?.email as string
-  );
 
   if (isLoading || !isReady) return <Loading />;
 
@@ -38,14 +30,7 @@ const MatchPage = () => {
       </p>
       <p>{match.date}</p>
 
-      {loggedInUser ? (
-        <AttendMatch
-          matchId={id as string}
-          loggedInUser={loggedInUser as Player}
-        />
-      ) : (
-        <p>Log in to attend match!</p>
-      )}
+      <AttendMatch matchId={id as string} roster={match.roster} />
 
       {match.roster ? (
         <div>

@@ -9,11 +9,11 @@ export type Match = {
   opposition: string;
 };
 
-export interface SquadPlayer extends Omit<Player, "emailVerified"> {
-  attending: boolean;
-}
+export interface SquadPlayer extends Omit<Player, "emailVerified"> {}
 
 export interface ScheduledMatch extends Match {
   _id: string;
-  roster: Array<SquadPlayer>;
+  roster?: Roster;
 }
+
+export type Roster = Array<SquadPlayer>;

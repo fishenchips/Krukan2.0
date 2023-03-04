@@ -1,4 +1,4 @@
-import { Match, ScheduledMatch } from "@/utils/types/match";
+import { Match, ScheduledMatch, SquadPlayer } from "@/utils/types/match";
 import { Player } from "@/utils/types/playerInfo";
 
 export const createMatch = async (enteredMatchData: Match) => {
@@ -13,7 +13,10 @@ export const createMatch = async (enteredMatchData: Match) => {
   return response.json();
 };
 
-export const attendMatchById = async (playerData: Player, matchId: string) => {
+export const attendMatchById = async (
+  playerData: SquadPlayer,
+  matchId: string
+) => {
   const response = await fetch(`/api/matches/attend-match/${matchId}`, {
     method: "PATCH",
     body: JSON.stringify({ playerData, matchId }),

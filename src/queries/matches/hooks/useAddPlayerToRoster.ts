@@ -1,9 +1,9 @@
-import { Player } from "@/utils/types/playerInfo";
+import { SquadPlayer } from "@/utils/types/match";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { attendMatchById } from "../match-queries";
 
 export const useAddPlayerToRoster = (
-  player: Player,
+  player: SquadPlayer,
   matchId: string,
   options?: UseMutationOptions
 ) =>
