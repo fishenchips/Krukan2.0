@@ -4,7 +4,6 @@ import { Loading } from "../layout/Loading";
 
 /* Todo 
   fix filtering
-  fix attending
   mobile
 */
 
@@ -12,8 +11,6 @@ export const MatchSchedule = () => {
   const { push } = useRouter();
 
   const { data: matches, isLoading } = useGetMatches();
-
-  console.log(matches);
 
   if (isLoading) return <Loading />;
 

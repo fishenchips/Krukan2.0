@@ -28,6 +28,19 @@ export const attendMatchById = async (
   return response.json();
 };
 
+export const unattendMatchById = async (
+  playerData: SquadPlayer,
+  matchId: string
+) => {
+  const response = await fetch(`/api/matches/unattend-match/${matchId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ playerData, matchId }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 export const getMatches = async (): Promise<Array<ScheduledMatch>> => {
   const response = await fetch("/api/matches/get-matches");
 
