@@ -1,14 +1,10 @@
-import { useAddPlayerToRoster } from "@/queries/matches/hooks/useAddPlayerToRoster";
 import { Player } from "@/utils/types/playerInfo";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
-import { useQueryClient } from "@tanstack/react-query";
-import {
-  matchKey,
-  useGetMatchById,
-} from "@/queries/matches/hooks/useGetMatchById";
+import { useGetMatchById } from "@/queries/matches/hooks/useGetMatchById";
 import { Loading } from "@/components/layout/Loading";
+import { AttendMatch } from "@/components/match/AttendMatch";
 
 const MatchPage = () => {
   const {
@@ -18,26 +14,11 @@ const MatchPage = () => {
 
   const { data: session } = useSession();
 
-  const queryClient = useQueryClient();
-
   const { data: match, isLoading } = useGetMatchById(id as string);
 
   const { data: loggedInUser } = useGetLoggedInUser(
     session?.user?.email as string
   );
-
-  const { mutate } = useAddPlayerToRoster(
-    loggedInUser as Player,
-    match?._id as string,
-    {
-      onSuccess: () => queryClient.invalidateQueries([matchKey, id]),
-    }
-  );
-
-  const handleAttendMatch = () => {
-    mutate();
-    console.log({ loggedInUser }, match?._id);
-  };
 
   if (isLoading || !isReady) return <Loading />;
 
@@ -57,9 +38,14 @@ const MatchPage = () => {
       </p>
       <p>{match.date}</p>
 
-      <div>
-        <button onClick={handleAttendMatch}>I can play!</button>
-      </div>
+      {loggedInUser ? (
+        <AttendMatch
+          matchId={id as string}
+          loggedInUser={loggedInUser as Player}
+        />
+      ) : (
+        <p>Log in to attend match!</p>
+      )}
 
       {match.roster ? (
         <div>
