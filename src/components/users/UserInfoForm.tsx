@@ -1,43 +1,61 @@
-import { SyntheticEvent, useRef } from "react";
 import { useAddUserInfo } from "@/queries/users/hooks/useAddUserInfo";
 import { positions } from "@/utils/positions";
+import { useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import { loggedInUserKey } from "@/queries/users/hooks/useGetLoggedInUser";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { PlayerInfo } from "@/utils/types/playerInfo";
+import { useToast } from "@chakra-ui/react";
 
 export const UserInfoForm = () => {
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
-  const positionRef = useRef<HTMLSelectElement>(null);
+  const session = useSession();
+  const queryClient = useQueryClient();
+  const toast = useToast();
 
-  const enteredFirstName = firstNameRef.current?.value;
-  const enteredLastName = lastNameRef.current?.value;
-  const enteredPosition = positionRef.current?.value;
+  const { register, handleSubmit, watch } = useForm<PlayerInfo>();
 
   const userData = {
-    firstName: enteredFirstName,
-    lastName: enteredLastName,
-    position: enteredPosition,
+    firstName: watch("firstName"),
+    lastName: watch("lastName"),
+    position: watch("position"),
   };
 
-  const { mutate } = useAddUserInfo(userData);
+  const { mutate } = useAddUserInfo(userData, {
+    onError: () => {
+      toast({
+        status: "error",
+        title: "Error updating user info.",
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries([
+        loggedInUserKey,
+        session.data?.user?.email,
+      ]);
+      toast({
+        status: "success",
+        title: "User info updated.",
+      });
+    },
+  });
 
-  const handlePatchUser = async (e: SyntheticEvent) => {
-    e.preventDefault();
-
-    console.log(userData);
+  const onSubmit: SubmitHandler<PlayerInfo> = () => {
     mutate();
   };
+
   return (
-    <form onSubmit={handlePatchUser}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <label htmlFor="firstName">First name</label>
-        <input type="text" name="firstName" ref={firstNameRef} />
+        <input type="text" {...register("firstName", { required: true })} />
       </div>
       <div>
         <label htmlFor="lastName">Last name</label>
-        <input type="text" name="lastName" ref={lastNameRef} />
+        <input type="text" {...register("lastName", { required: true })} />
       </div>
       <div>
         <label htmlFor="position">Preferred position</label>
-        <select name="position" defaultValue="" ref={positionRef}>
+        <select defaultValue="" {...register("position", { required: true })}>
           <option value="" disabled>
             --select your position--
           </option>
@@ -49,7 +67,7 @@ export const UserInfoForm = () => {
         </select>
       </div>
       <div>
-        <button type="submit">Send</button>
+        <button type="submit">Update</button>
       </div>
     </form>
   );

@@ -10,7 +10,7 @@ export const useGetLoggedInUser = (
   options?: UseQueryOptions<unknown, ApiError, Player>
 ) =>
   useQuery({
-    queryKey: [loggedInUserKey],
+    queryKey: [loggedInUserKey, email],
     queryFn: () => getLoggedInUser(email),
     ...options,
   });

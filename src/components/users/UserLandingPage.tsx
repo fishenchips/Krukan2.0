@@ -28,22 +28,24 @@ export const UserLandingPage = () => {
 
   return (
     <div>
-      {loggedInUser && (
-        <>
-          <p className={styles.welcomeMsg}>
-            Welcome back {loggedInUser.info.firstName}.
-          </p>
-          {Object.hasOwn(loggedInUser, "info") ? (
+      {loggedInUser ? (
+        Object.hasOwn(loggedInUser, "info") ? (
+          <>
+            <p className={styles.welcomeMsg}>
+              Welcome back {loggedInUser.info.firstName}.
+            </p>
             <div>
               <Link href={"/matches"}> Go to matches</Link>
             </div>
-          ) : (
-            <>
-              <p>Please Provide us with some info about yourself!</p>
-              <UserInfoForm />
-            </>
-          )}
-        </>
+          </>
+        ) : (
+          <>
+            <p>Please Provide us with some info about yourself!</p>
+            <UserInfoForm />
+          </>
+        )
+      ) : (
+        <p>Something went wrong. Please try log in agian</p>
       )}
     </div>
   );
