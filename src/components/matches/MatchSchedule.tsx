@@ -4,7 +4,6 @@ import { Loading } from "../layout/Loading";
 
 /* Todo 
   fix filtering
-  mobile
 */
 
 export const MatchSchedule = () => {
@@ -13,6 +12,8 @@ export const MatchSchedule = () => {
   const { data: matches, isLoading } = useGetMatches();
 
   if (isLoading) return <Loading />;
+
+  if (matches?.length === 0) return <p>No matches available.</p>;
 
   return (
     <div>

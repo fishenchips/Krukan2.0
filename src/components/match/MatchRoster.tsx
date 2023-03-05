@@ -6,6 +6,8 @@ interface Props {
 }
 
 export const MatchRoster: React.FC<Props> = ({ roster }) => {
+  if (!roster) return <p>No players are attending this match.</p>;
+
   const goalkeepers = roster.filter((p) => p.info.position === "goal-keeper");
   const defenders = roster.filter((p) => p.info.position === "defender");
   const midfielders = roster.filter((p) => p.info.position === "midfielder");

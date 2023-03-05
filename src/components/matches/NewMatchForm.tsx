@@ -9,7 +9,7 @@ import { Match } from "@/utils/types/match";
 export const NewMatchForm = () => {
   const { register, handleSubmit, watch, reset } = useForm<Match>({
     defaultValues: {
-      home: false,
+      home: true,
       arena: "",
       opposition: "",
       date: "",
@@ -65,7 +65,7 @@ export const NewMatchForm = () => {
             id="isHomeMatch"
             size="lg"
             colorScheme="red"
-            isRequired
+            defaultChecked
             {...register("home")}
           />
         </div>
