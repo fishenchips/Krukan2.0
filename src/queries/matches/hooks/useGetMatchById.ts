@@ -1,7 +1,7 @@
 import { ApiError } from "@/utils/types/error";
+import { Match } from "@/utils/types/match";
 import { useQuery, UseQueryOptions } from "@tanstack/react-query";
 import { getMatchById } from "../match-queries";
-import { Match } from "../types";
 
 export const matchKey = "single-match";
 
