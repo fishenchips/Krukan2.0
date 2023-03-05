@@ -1,7 +1,8 @@
-import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
+import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Loading } from "../layout/Loading";
 import { UserInfoForm } from "./UserInfoForm";
+import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import styles from "./UserLandingPage.module.css";
 
 export const UserLandingPage = () => {
@@ -27,20 +28,24 @@ export const UserLandingPage = () => {
 
   return (
     <div>
-      {loggedInUser && (
-        <>
-          <p className={styles.welcomeMsg}>
-            Welcome back {loggedInUser.info.firstName}.
-          </p>
-          {Object.hasOwn(loggedInUser, "info") ? (
-            ""
-          ) : (
-            <>
-              <p>Please Provide us with some info about yourself!</p>
-              <UserInfoForm />
-            </>
-          )}
-        </>
+      {loggedInUser ? (
+        Object.hasOwn(loggedInUser, "info") ? (
+          <>
+            <p className={styles.welcomeMsg}>
+              Welcome back {loggedInUser.info.firstName}.
+            </p>
+            <div>
+              <Link href={"/matches"}> Go to matches</Link>
+            </div>
+          </>
+        ) : (
+          <>
+            <p>Please Provide us with some info about yourself!</p>
+            <UserInfoForm />
+          </>
+        )
+      ) : (
+        <p>Something went wrong. Please try log in agian</p>
       )}
     </div>
   );

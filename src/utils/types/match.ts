@@ -1,15 +1,19 @@
 import { Player } from "./playerInfo";
 
 export type Match = {
-  _id?: string;
   home: boolean;
   arena: string;
   date: string;
+  time: string;
   gameType: string;
   opposition: string;
-  roster?: Array<SquadPlayer>;
 };
 
-export interface SquadPlayer extends Player {
-  attending: boolean;
+export interface SquadPlayer extends Omit<Player, "emailVerified"> {}
+
+export interface ScheduledMatch extends Match {
+  _id: string;
+  roster?: Roster;
 }
+
+export type Roster = Array<SquadPlayer>;

@@ -1,12 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { MongoClient, ObjectId } from "mongodb";
 
-type Data = {
-  data: any;
-  message: string;
-};
-
-const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PATCH") {
     const { emailVerified, ...data } = req.body;
 
@@ -22,12 +17,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 
     const update = await matchesCollection.updateOne(
       { _id: DBmatch?._id },
-      { $addToSet: { roster: data.playerData } }
+      { $pull: { roster: data.playerData } }
     );
 
     client.close();
 
-    res.status(200).json({ message: "User added to match.", data });
+    res.status(200).json({ message: "User removed from match.", data });
 
     return data;
   }

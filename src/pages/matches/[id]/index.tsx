@@ -1,57 +1,30 @@
-import { useAddPlayerToRoster } from "@/queries/matches/hooks/useAddPlayerToRoster";
-import { Player } from "@/utils/types/playerInfo";
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
-import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
+import { useGetMatchById } from "@/queries/matches/hooks/useGetMatchById";
+import { Loading } from "@/components/layout/Loading";
+import { AttendMatch } from "@/components/match/AttendMatch";
+import { MatchRoster } from "@/components/match/MatchRoster";
+import { MatchInfo } from "@/components/match/MatchInfo";
 
 const MatchPage = () => {
-  const { query } = useRouter();
-  const { data: session } = useSession();
+  const {
+    query: { id },
+    isReady,
+  } = useRouter();
 
-  const { data: loggedInUser } = useGetLoggedInUser(
-    session?.user?.email as string
-  );
+  const { data: match, isLoading } = useGetMatchById(id as string);
 
-  const { id, home, arena, date, gameType, opposition, roster } = JSON.parse(
-    query.match as string
-  );
+  if (isLoading || !isReady) return <Loading />;
 
-  const { mutate } = useAddPlayerToRoster(loggedInUser as Player, id);
-
-  const handleAttendMatch = () => {
-    mutate();
-    console.log({ loggedInUser }, { id });
-  };
+  if (!match) {
+    return <p>Match not found</p>;
+  }
 
   return (
-    <div>
-      <h4>
-        {home
-          ? `FC Krukan - ${opposition} (H)`
-          : `${opposition} - FC Krukan (A)`}
-      </h4>
-      <p>
-        {gameType} match at {arena}
-      </p>
-      <p>{date}</p>
-
-      <div>
-        <button onClick={handleAttendMatch}>I can play!</button>
-      </div>
-
-      {roster ? (
-        <div>
-          <p>Players:</p>
-          {roster.map((player: Player) => (
-            <span key={player._id}>
-              {player.info.firstName} {player.info.lastName}
-            </span>
-          ))}
-        </div>
-      ) : (
-        <p>No players yet attending this match.</p>
-      )}
-    </div>
+    <>
+      <MatchInfo match={match} />
+      <AttendMatch matchId={id as string} roster={match.roster} />
+      <MatchRoster roster={match.roster} />
+    </>
   );
 };
 

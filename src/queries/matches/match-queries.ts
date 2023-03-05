@@ -1,10 +1,10 @@
+import { Match, ScheduledMatch, SquadPlayer } from "@/utils/types/match";
 import { Player } from "@/utils/types/playerInfo";
-import type { Match } from "./types";
 
 export const createMatch = async (enteredMatchData: Match) => {
   const response = await fetch("/api/admin/post-match", {
     method: "POST",
-    body: JSON.stringify({ enteredMatchData }),
+    body: JSON.stringify(enteredMatchData),
     headers: {
       "Content-Type": "application/json",
     },
@@ -13,7 +13,10 @@ export const createMatch = async (enteredMatchData: Match) => {
   return response.json();
 };
 
-export const attendMatchById = async (playerData: Player, matchId: string) => {
+export const attendMatchById = async (
+  playerData: SquadPlayer,
+  matchId: string
+) => {
   const response = await fetch(`/api/matches/attend-match/${matchId}`, {
     method: "PATCH",
     body: JSON.stringify({ playerData, matchId }),
@@ -21,6 +24,31 @@ export const attendMatchById = async (playerData: Player, matchId: string) => {
       "Content-Type": "application/json",
     },
   });
+
+  return response.json();
+};
+
+export const unattendMatchById = async (
+  playerData: SquadPlayer,
+  matchId: string
+) => {
+  const response = await fetch(`/api/matches/unattend-match/${matchId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ playerData, matchId }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+export const getMatches = async (): Promise<Array<ScheduledMatch>> => {
+  const response = await fetch("/api/matches/get-matches");
+
+  return response.json();
+};
+
+export const getMatchById = async (id: string): Promise<ScheduledMatch> => {
+  const response = await fetch(`/api/matches/get-match/${id}`);
 
   return response.json();
 };

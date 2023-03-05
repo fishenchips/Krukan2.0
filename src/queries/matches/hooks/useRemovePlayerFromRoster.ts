@@ -1,13 +1,13 @@
 import { SquadPlayer } from "@/utils/types/match";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
-import { attendMatchById } from "../match-queries";
+import { unattendMatchById } from "../match-queries";
 
-export const useAddPlayerToRoster = (
+export const useRemovePlayerFromRoster = (
   player: SquadPlayer,
   matchId: string,
   options?: UseMutationOptions
 ) =>
   useMutation({
-    mutationFn: () => attendMatchById(player, matchId),
+    mutationFn: () => unattendMatchById(player, matchId),
     ...options,
   });
