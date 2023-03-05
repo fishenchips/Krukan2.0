@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useGetMatchById } from "@/queries/matches/hooks/useGetMatchById";
 import { Loading } from "@/components/layout/Loading";
 import { AttendMatch } from "@/components/match/AttendMatch";
+import { MatchRoster } from "@/components/match/MatchRoster";
 
 const MatchPage = () => {
   const {
@@ -31,19 +32,7 @@ const MatchPage = () => {
       <p>{match.date}</p>
 
       <AttendMatch matchId={id as string} roster={match.roster} />
-
-      {match.roster ? (
-        <div>
-          <p>Players:</p>
-          {match.roster.map((player: Player) => (
-            <span key={player._id}>
-              {player.info.firstName} {player.info.lastName}
-            </span>
-          ))}
-        </div>
-      ) : (
-        <p>No players yet attending this match.</p>
-      )}
+      <MatchRoster roster={match.roster} />
     </div>
   );
 };
