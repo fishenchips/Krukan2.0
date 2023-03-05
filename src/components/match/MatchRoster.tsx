@@ -2,7 +2,7 @@ import { Roster } from "@/utils/types/match";
 import { StyledPosition, StyledPositions } from "./styled";
 
 interface Props {
-  roster: Roster;
+  roster?: Roster;
 }
 
 export const MatchRoster: React.FC<Props> = ({ roster }) => {

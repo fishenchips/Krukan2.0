@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 
 interface Props {
   matchId: string;
-  roster: Roster;
+  roster?: Roster;
 }
 
 export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
