@@ -9,7 +9,8 @@ export const UserLandingPage = () => {
   const { data: session } = useSession();
 
   const { data: loggedInUser, isLoading } = useGetLoggedInUser(
-    session?.user?.email as string
+    session?.user?.email as string,
+    { retry: 1 }
   );
 
   if (isLoading) return <Loading />;
