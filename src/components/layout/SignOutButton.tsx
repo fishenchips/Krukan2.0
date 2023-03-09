@@ -1,7 +1,8 @@
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDoorOpen } from "@fortawesome/free-solid-svg-icons";
+import { GrLogout } from "react-icons/gr";
+import styles from "./SignInForm.module.css";
+
 import { useToast } from "@chakra-ui/react";
 
 export const SignOutButton = () => {
@@ -23,7 +24,7 @@ export const SignOutButton = () => {
 
   return (
     <div onClick={handleSignOut}>
-      <FontAwesomeIcon icon={faDoorOpen} />
+      <GrLogout className={styles.icon} />
       <span>Log out</span>
     </div>
   );

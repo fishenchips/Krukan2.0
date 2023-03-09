@@ -1,6 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { GrLogin } from "react-icons/gr";
 import { useRouter } from "next/router";
+import styles from "./SignInForm.module.css";
 
 export const SignInButton = () => {
   const { push, asPath } = useRouter();
@@ -10,7 +10,9 @@ export const SignInButton = () => {
   };
   return (
     <div onClick={handleSignIn}>
-      <FontAwesomeIcon icon={faUser} />
+      <span>
+        <GrLogin className={styles.icon} />
+      </span>
       <span>Log in</span>
     </div>
   );
