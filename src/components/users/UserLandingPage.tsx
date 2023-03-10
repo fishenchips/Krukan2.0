@@ -31,7 +31,6 @@ export const UserLandingPage = () => {
         </>
       ) : (
         <div>
-          <p>Welcome {loggedInUser?.info.firstName}.</p>
           <p>Please Provide us with some info about yourself!</p>
           <UserInfoForm />
         </div>
