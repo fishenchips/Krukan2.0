@@ -30,7 +30,10 @@ export const MatchSchedule = () => {
         </Thead>
         <tbody>
           {matches?.map((match) => (
-            <MatchTr key={match._id}>
+            <MatchTr
+              key={match._id}
+              onClick={() => push(`/matches/${match._id}`)}
+            >
               <td>{match.date}</td>
               <td>{match.time}</td>
               <MatchTd>
