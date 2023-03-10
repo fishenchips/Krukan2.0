@@ -4,6 +4,8 @@ import { Loading } from "../layout/Loading";
 import { UserInfoForm } from "./UserInfoForm";
 import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import styles from "./UserLandingPage.module.css";
+import { Player } from "@/utils/types/playerInfo";
+import { SocialMedia } from "../layout/SocialMedia";
 
 export const UserLandingPage = () => {
   const { data: session } = useSession();
@@ -15,38 +17,24 @@ export const UserLandingPage = () => {
 
   if (isLoading) return <Loading />;
 
-  if (!session) {
-    return (
-      <div>
-        <p className={styles.welcomeMsg}>Welcome to Krukan 2.0!</p>
-        <p>
-          Please log in by pressing the log in button. Enter your e-mail and
-          open your inbox.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div>
-      {loggedInUser ? (
-        Object.hasOwn(loggedInUser, "info") ? (
-          <>
-            <p className={styles.welcomeMsg}>
-              Welcome back {loggedInUser.info.firstName}.
-            </p>
-            <div>
-              <Link href={"/matches"}> Go to matches</Link>
-            </div>
-          </>
-        ) : (
-          <>
-            <p>Please Provide us with some info about yourself!</p>
-            <UserInfoForm />
-          </>
-        )
+      {Object.hasOwn(loggedInUser as Player, "info") ? (
+        <>
+          <p className={styles.welcomeMsg}>
+            Welcome back {loggedInUser?.info.firstName}.
+          </p>
+          <div>
+            <Link href={"/matches"}> Go to matches</Link>
+          </div>
+          <SocialMedia />
+        </>
       ) : (
-        <p>Something went wrong. Please try log in agian</p>
+        <div>
+          <p>Welcome {loggedInUser?.info.firstName}.</p>
+          <p>Please Provide us with some info about yourself!</p>
+          <UserInfoForm />
+        </div>
       )}
     </div>
   );

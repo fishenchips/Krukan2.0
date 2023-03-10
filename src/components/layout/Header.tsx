@@ -13,7 +13,7 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.banner}>
         <h3 className={styles.title} onClick={() => push("/")}>
-          FC Krukan - Lirarnas Lag{" "}
+          FC Krukan - Lirarnas Lag
         </h3>
       </div>
       <div className={styles.userHub}>
