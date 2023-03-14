@@ -56,7 +56,8 @@ export const MatchSchedule = () => {
 
 const MatchesDiv = styled.div`
   width: 90wv;
-  border: 1px solid blue;
+  margin: 0 auto;
+
   @media (min-width: 768px) {
     width: 70vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -66,10 +67,13 @@ const MatchesDiv = styled.div`
 
 const MatchesTable = styled.table`
   width: 100%;
-  padding: 30px;
 
   tr {
     cursor: pointer;
+  }
+
+  @media (min-width: 768px) {
+    padding: 30px;
   }
 `;
 
@@ -92,7 +96,7 @@ const MatchTr = styled.tr`
   }
 `;
 
-const MatchTimeTypeArena = styled.tr`
+const MatchTimeTypeArena = styled.td`
   @media (max-width: 768px) {
     display: none;
   }
