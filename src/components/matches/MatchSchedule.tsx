@@ -35,17 +35,17 @@ export const MatchSchedule = () => {
               onClick={() => push(`/matches/${match._id}`)}
             >
               <td>{match.date}</td>
-              <td>{match.time}</td>
+              <MatchTimeTypeArena>{match.time}</MatchTimeTypeArena>
               <MatchTd>
                 {match.home
                   ? `Krukan - ${match.opposition} `
                   : `${match.opposition} - Krukan `}
               </MatchTd>
-              <td>
+              <MatchTimeTypeArena>
                 {match.gameType.charAt(0).toUpperCase() +
                   match.gameType.slice(1)}
-              </td>
-              <td>{match.arena}</td>
+              </MatchTimeTypeArena>
+              <MatchTimeTypeArena>{match.arena}</MatchTimeTypeArena>
             </MatchTr>
           ))}
         </tbody>
@@ -55,6 +55,8 @@ export const MatchSchedule = () => {
 };
 
 const MatchesDiv = styled.div`
+  width: 90wv;
+  border: 1px solid blue;
   @media (min-width: 768px) {
     width: 70vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -87,6 +89,12 @@ const MatchTr = styled.tr`
 
   &:hover {
     background-color: #e6e6e6;
+  }
+`;
+
+const MatchTimeTypeArena = styled.tr`
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 

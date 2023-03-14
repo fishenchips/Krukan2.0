@@ -1,4 +1,9 @@
 .footer div {
-  display: flex;
-  justify-content: center;
+  display: none;
+}
+@media (min-width: 1000px) {
+  .footer div {
+    display: flex;
+    justify-content: center;
+  }
 }
