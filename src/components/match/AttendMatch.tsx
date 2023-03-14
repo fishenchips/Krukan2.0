@@ -34,6 +34,7 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
       onSuccess: () => queryClient.invalidateQueries([matchKey, matchId]),
     }
   );
+
   const { mutate: removeFromGame } = useRemovePlayerFromRoster(
     {
       _id: loggedInUser?._id as string,
@@ -50,10 +51,6 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
     }
   );
 
-  if (!loggedInUser) {
-    return <p>Log in to attend match!</p>;
-  }
-
   const handleAttendMatch = () => {
     attendGame();
   };
@@ -63,7 +60,7 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
   };
 
   const alreadyAttending = roster?.some(
-    (player) => player._id === loggedInUser._id
+    (player) => player._id === loggedInUser?._id
   );
 
   return (

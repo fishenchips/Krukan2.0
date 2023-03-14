@@ -3,10 +3,6 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Loading } from "../layout/Loading";
 
-/* Todo 
-  fix filtering
-*/
-
 export const MatchSchedule = () => {
   const { push } = useRouter();
 
@@ -15,6 +11,10 @@ export const MatchSchedule = () => {
   if (isLoading) return <Loading />;
 
   if (matches?.length === 0) return <p>No matches available.</p>;
+
+  /*   console.log(new Date(matches[0].date).toLocaleDateString("en-GB"), "here");
+  use this later, fix type of date
+   */
 
   return (
     <MatchesDiv>

@@ -4,12 +4,15 @@ import { Loading } from "@/components/layout/Loading";
 import { AttendMatch } from "@/components/match/AttendMatch";
 import { MatchRoster } from "@/components/match/MatchRoster";
 import { MatchInfo } from "@/components/match/MatchInfo";
+import { useSession } from "next-auth/react";
 
 const MatchPage = () => {
   const {
     query: { id },
     isReady,
   } = useRouter();
+
+  const { data: session } = useSession();
 
   const { data: match, isLoading } = useGetMatchById(id as string);
 
@@ -22,7 +25,11 @@ const MatchPage = () => {
   return (
     <>
       <MatchInfo match={match} />
-      <AttendMatch matchId={id as string} roster={match.roster} />
+      {session ? (
+        <AttendMatch matchId={id as string} roster={match.roster} />
+      ) : (
+        <p>Log in to attend match!</p>
+      )}
       <MatchRoster roster={match.roster} />
     </>
   );
