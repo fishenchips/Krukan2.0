@@ -7,10 +7,14 @@ import {
 } from "@chakra-ui/react";
 import styled from "styled-components";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { GrLogin } from "react-icons/gr";
 import Link from "next/link";
 import { BiHome, BiFootball } from "react-icons/bi";
+import { useSession } from "next-auth/react";
 
 export const HamburgerMenu = () => {
+  const { data: session } = useSession();
+
   return (
     <Menu>
       <MenuButton
@@ -26,6 +30,13 @@ export const HamburgerMenu = () => {
         <MenuItem icon={<BiFootball />} as={Link} href="/matches">
           Matches
         </MenuItem>
+        {session ? (
+          ""
+        ) : (
+          <MenuItem icon={<GrLogin />} as={Link} href="/auth/signin">
+            Login
+          </MenuItem>
+        )}
       </StyledMenuList>
     </Menu>
   );
