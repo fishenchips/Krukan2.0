@@ -12,7 +12,7 @@ import { BiHome, BiFootball } from "react-icons/bi";
 
 export const HamburgerMenu = () => {
   return (
-    <StyledMenu>
+    <Menu>
       <MenuButton
         as={IconButton}
         aria-label="Options"
@@ -27,15 +27,10 @@ export const HamburgerMenu = () => {
           Matches
         </MenuItem>
       </StyledMenuList>
-    </StyledMenu>
+    </Menu>
   );
 };
 
-const StyledMenu = styled(Menu)`
-  @media (max-width: 500px) {
-    display: none;
-  }
-`;
 const StyledMenuList = styled(MenuList)`
   color: black;
 `;
