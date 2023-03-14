@@ -18,7 +18,7 @@ export const MatchSchedule = () => {
 
   return (
     <MatchesDiv>
-      <MatchesTable>
+      <MatchesTable cellSpacing="0" cellPadding="0">
         <Thead>
           <tr>
             <Th>DATE</Th>
@@ -65,6 +65,10 @@ const MatchesDiv = styled.div`
 const MatchesTable = styled.table`
   width: 100%;
   padding: 30px;
+
+  tr {
+    cursor: pointer;
+  }
 `;
 
 const Thead = styled.thead`
@@ -80,8 +84,6 @@ const Th = styled.th`
 
 const MatchTr = styled.tr`
   height: 2.5rem;
-  border: none;
-  cursor: poiner;
 
   &:hover {
     background-color: #e6e6e6;
