@@ -39,8 +39,7 @@ const Facebook = styled(Link)`
 
 const Instagram = styled(Link)`
   font-size: 1.25rem;
-  padding: 0.5px 1.5px;
-  margin: 0 auto;
+  padding: 1px 1.5px 0 1.5px;
   border-radius: 5px;
   text-align: center;
   color: white;
