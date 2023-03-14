@@ -54,7 +54,6 @@ const NonBurger = styled.div`
   display: none;
   @media (min-width: 500px) {
     width: 15rem;
-    border: 1px solid blue;
     display: flex;
     justify-content: space-between;
   }
