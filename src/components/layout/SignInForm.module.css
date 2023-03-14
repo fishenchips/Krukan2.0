@@ -5,9 +5,8 @@
 }
 
 .email input {
-  width: 50%;
-  min-width: 500px;
   height: 2rem;
+  max-width: 500px;
   margin: 1rem 0;
   font-size: 1.25rem;
   border: 2px solid #80051b;

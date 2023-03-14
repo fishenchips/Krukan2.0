@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { SignInButton } from "./SignInButton";
 import { SignOutButton } from "./SignOutButton";
+import { BiFootball } from "react-icons/bi";
 
 export const Header = () => {
   const { data: session, status } = useSession();
@@ -15,6 +16,12 @@ export const Header = () => {
         <h3 className={styles.title} onClick={() => push("/")}>
           FC Krukan - Lirarnas Lag
         </h3>
+      </div>
+      <div className={styles.title} onClick={() => push("/matches")}>
+        <span>
+          <BiFootball />
+        </span>
+        <span>Matches</span>
       </div>
       <div className={styles.userHub}>
         {status === "loading" ? (
