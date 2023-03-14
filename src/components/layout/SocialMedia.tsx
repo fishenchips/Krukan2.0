@@ -7,31 +7,54 @@ export const SocialMedia = () => {
     <LinksDiv>
       <p>Make sure you follow us on our social medias!</p>
       <div>
-        <SocialMediaLink
-          href={"https://www.facebook.com/fckrukan"}
-          target="_blank"
-        >
+        <Facebook href={"https://www.facebook.com/fckrukan"} target="_blank">
           <BsFacebook />
-        </SocialMediaLink>
-        <SocialMediaLink
-          href={"https://www.instagram.com/fckrukan/"}
-          target="_blank"
-        >
+        </Facebook>
+        <Instagram href={"https://www.instagram.com/fckrukan/"} target="_blank">
           <BsInstagram />
-        </SocialMediaLink>
+        </Instagram>
       </div>
     </LinksDiv>
   );
 };
 
 const LinksDiv = styled.div`
-  max-width: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @media (min-width: 768px) {
+    display: flex;
+    max-width: 500px;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
-const SocialMediaLink = styled(Link)`
+const Facebook = styled(Link)`
   font-size: 1.5rem;
-  padding: 1rem;
+  margin-right: 2rem;
+  color: #3b5998;
+
+  &:visited {
+    color: #3b5998;
+  }
+`;
+
+const Instagram = styled(Link)`
+  font-size: 1.25rem;
+  padding: 0.5px 1.5px;
+  margin: 0 auto;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  background: background: #f09433; 
+  background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+  background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+  background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+
+  &:visited {
+    background: background: #f09433; 
+    background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+    background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+  }
 `;
