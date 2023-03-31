@@ -20,6 +20,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/matches/[id]"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/pages/matches/[id]",
+    "src/pages/admin/create-match"
+  ],
   "exclude": ["node_modules"]
 }

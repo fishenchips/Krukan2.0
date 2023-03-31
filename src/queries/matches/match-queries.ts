@@ -1,5 +1,4 @@
 import { Match, ScheduledMatch, SquadPlayer } from "@/utils/types/match";
-import { Player } from "@/utils/types/playerInfo";
 
 export const createMatch = async (enteredMatchData: Match) => {
   const response = await fetch("/api/admin/post-match", {
