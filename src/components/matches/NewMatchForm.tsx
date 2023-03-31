@@ -14,6 +14,7 @@ export const NewMatchForm = () => {
       arena: "",
       opposition: "",
       date: "",
+      shortDate: "",
       gameType: "",
     },
   });
@@ -28,6 +29,7 @@ export const NewMatchForm = () => {
       arena: watch("arena"),
       opposition: watch("opposition"),
       date: dayjs(watch("date")).format("dddd, D/M HH:mm"),
+      shortDate: dayjs(watch("date")).format("ddd, D/M"),
       gameType: watch("gameType"),
     },
     {

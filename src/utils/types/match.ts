@@ -4,6 +4,7 @@ export type Match = {
   home: boolean;
   arena: string;
   date: string;
+  shortDate: string;
   gameType: string;
   opposition: string;
 };

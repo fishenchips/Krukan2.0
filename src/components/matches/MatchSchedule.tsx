@@ -2,6 +2,7 @@ import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Loading } from "../layout/Loading";
+import dayjs from "dayjs";
 
 export const MatchSchedule = () => {
   const { push } = useRouter();
@@ -11,10 +12,6 @@ export const MatchSchedule = () => {
   if (isLoading) return <Loading />;
 
   if (matches?.length === 0) return <p>No matches available.</p>;
-
-  /*   console.log(new Date(matches[0].date).toLocaleDateString("en-GB"), "here");
-  use this later, fix type of date
-   */
 
   return (
     <MatchesDiv>
@@ -29,25 +26,28 @@ export const MatchSchedule = () => {
           </tr>
         </Thead>
         <tbody>
-          {matches?.map((match) => (
-            <MatchTr
-              key={match._id}
-              onClick={() => push(`/matches/${match._id}`)}
-            >
-              <td>{match.date}</td>
-              <MatchTimeTypeArena>{match.time}</MatchTimeTypeArena>
-              <MatchTd>
-                {match.home
-                  ? `Krukan - ${match.opposition} `
-                  : `${match.opposition} - Krukan `}
-              </MatchTd>
-              <MatchTimeTypeArena>
-                {match.gameType.charAt(0).toUpperCase() +
-                  match.gameType.slice(1)}
-              </MatchTimeTypeArena>
-              <MatchTimeTypeArena>{match.arena}</MatchTimeTypeArena>
-            </MatchTr>
-          ))}
+          {matches?.map((match) => {
+            console.log(dayjs(match.date).format("ddd, D/M HH:mm"));
+            return (
+              <MatchTr
+                key={match._id}
+                onClick={() => push(`/matches/${match._id}`)}
+              >
+                <td>{match.date}</td>
+                <td>{match?.shortDate}</td>
+                <MatchTd>
+                  {match.home
+                    ? `Krukan - ${match.opposition} `
+                    : `${match.opposition} - Krukan `}
+                </MatchTd>
+                <MatchTimeTypeArena>
+                  {match.gameType.charAt(0).toUpperCase() +
+                    match.gameType.slice(1)}
+                </MatchTimeTypeArena>
+                <MatchTimeTypeArena>{match.arena}</MatchTimeTypeArena>
+              </MatchTr>
+            );
+          })}
         </tbody>
       </MatchesTable>
     </MatchesDiv>
