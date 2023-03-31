@@ -51,3 +51,15 @@ export const getMatchById = async (id: string): Promise<ScheduledMatch> => {
 
   return response.json();
 };
+
+export const updateMatch = async (id: string, matchData: Match) => {
+  const response = await fetch(`/api/matches/edit-match/${id}`, {
+    method: "PATCH",
+    body: JSON.stringify({ id, matchData }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  return response.json();
+};
