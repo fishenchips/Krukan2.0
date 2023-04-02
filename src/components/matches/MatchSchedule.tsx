@@ -2,7 +2,6 @@ import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Loading } from "../layout/Loading";
-import dayjs from "dayjs";
 
 export const MatchSchedule = () => {
   const { push } = useRouter();
@@ -19,7 +18,6 @@ export const MatchSchedule = () => {
         <Thead>
           <tr>
             <Th>DATE</Th>
-            <Th>TIME</Th>
             <Th>TEAMS</Th>
             <Th>TYPE</Th>
             <Th>ARENA</Th>
@@ -27,14 +25,13 @@ export const MatchSchedule = () => {
         </Thead>
         <tbody>
           {matches?.map((match) => {
-            console.log(dayjs(match.date).format("ddd, D/M HH:mm"));
             return (
               <MatchTr
                 key={match._id}
                 onClick={() => push(`/matches/${match._id}`)}
               >
-                <td>{match.date}</td>
-                <td>{match?.shortDate}</td>
+                <MatchTimeTypeArena>{match.date}</MatchTimeTypeArena>
+                <ShortDate>{match.shortDate}</ShortDate>
                 <MatchTd>
                   {match.home
                     ? `Krukan - ${match.opposition} `
@@ -108,4 +105,17 @@ const MatchTd = styled.td`
   text-align: center;
   color: #80051b;
   font-weight: 600;
+
+  @media (max-width: 768px) {
+    font-weight: 500;
+    font-size: 0.75rem;
+  }
+`;
+
+const ShortDate = styled.td`
+  font-size: 0.75rem;
+
+  @media (min-width: 768px) {
+    display: none;
+  }
 `;
