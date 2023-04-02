@@ -11,8 +11,11 @@ export type Match = {
 
 export interface SquadPlayer extends Omit<Player, "emailVerified"> {}
 
-export interface ScheduledMatch extends Match {
+export interface UpdatedMatch extends Match {
   _id: string;
+}
+
+export interface ScheduledMatch extends UpdatedMatch {
   roster?: Roster;
 }
 

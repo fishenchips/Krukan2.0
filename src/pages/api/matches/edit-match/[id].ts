@@ -3,7 +3,7 @@ import { MongoClient, ObjectId } from "mongodb";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PATCH") {
-    const { roster, ...data } = req.query;
+    const data = req.body;
 
     const client = await MongoClient.connect(process.env.MONGODB_URI as string);
 
@@ -15,7 +15,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       _id: new ObjectId(data._id as string),
     });
 
-    const update = await matchesCollection.updateOne(
+    await matchesCollection.updateOne(
       { _id: DBMatch?._id },
       {
         $set: {
@@ -35,7 +35,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.status(404).json({ message: "Match not found." });
     }
 
-    res.status(200).json({ message: "match updated.", update });
+    res.status(200).json({ message: "match updated.", data });
   }
 };
 

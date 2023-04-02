@@ -1,13 +1,12 @@
-import { Match } from "@/utils/types/match";
+import { UpdatedMatch } from "@/utils/types/match";
 import { useMutation, UseMutationOptions } from "@tanstack/react-query";
 import { updateMatch } from "../match-queries";
 
 export const useUpdateMatchById = (
-  match: Match,
-  matchId: string,
+  matchData: UpdatedMatch,
   options?: UseMutationOptions
 ) =>
   useMutation({
-    mutationFn: () => updateMatch(matchId, match),
+    mutationFn: () => updateMatch(matchData),
     ...options,
   });

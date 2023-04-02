@@ -3,19 +3,36 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
 import dayjs from "dayjs";
 
-import { useCreateMatch } from "@/queries/matches/hooks/useCreateMatch";
 import { matchesKey } from "@/queries/matches/hooks/useGetMatches";
-import { Match } from "@/utils/types/match";
+import { UpdatedMatch } from "@/utils/types/match";
+import { useUpdateMatchById } from "@/queries/matches/hooks/useUpdateMatchById";
+import { useRouter } from "next/router";
 
-export const UpdateMatch = () => {
-  const { register, handleSubmit, watch, reset } = useForm<Match>({
+interface Props {
+  _id: string;
+  home: boolean;
+  arena: string;
+  date: string;
+  gameType: string;
+  opposition: string;
+}
+
+export const UpdateMatch: React.FC<Props> = ({
+  _id,
+  home,
+  arena,
+  date,
+  gameType,
+  opposition,
+}) => {
+  const { register, handleSubmit, watch } = useForm<UpdatedMatch>({
     defaultValues: {
-      home: true,
-      arena: "",
-      opposition: "",
-      date: "",
-      shortDate: "",
-      gameType: "",
+      _id,
+      home,
+      arena,
+      opposition,
+      date,
+      gameType,
     },
   });
 
@@ -23,8 +40,11 @@ export const UpdateMatch = () => {
 
   const toast = useToast();
 
-  const { mutate } = useCreateMatch(
+  const { push } = useRouter();
+
+  const { mutate } = useUpdateMatchById(
     {
+      _id,
       home: watch("home"),
       arena: watch("arena"),
       opposition: watch("opposition"),
@@ -37,7 +57,7 @@ export const UpdateMatch = () => {
         toast({
           status: "error",
           title: "Error",
-          description: "Couldn't create match. Please try again.",
+          description: "Couldn't update match. Please try again.",
           isClosable: true,
         });
       },
@@ -45,20 +65,21 @@ export const UpdateMatch = () => {
         queryClient.invalidateQueries([matchesKey]);
         toast({
           status: "success",
-          title: "Match created",
+          title: "Match updated",
           isClosable: true,
         });
-        reset();
+        push("/admin");
       },
     }
   );
 
-  const onSubmit: SubmitHandler<Match> = () => {
+  const onSubmit: SubmitHandler<UpdatedMatch> = () => {
     mutate();
   };
 
   return (
     <>
+      <h2>For now you need to fill in date again no matter what!</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="isHomeMatch">Home match (true/false)</label>
@@ -108,7 +129,7 @@ export const UpdateMatch = () => {
             <option value="league">league</option>
           </select>
         </div>
-        <button type="submit">Create match</button>
+        <button type="submit">Update</button>
       </form>
     </>
   );

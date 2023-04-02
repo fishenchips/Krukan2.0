@@ -1,4 +1,9 @@
-import { Match, ScheduledMatch, SquadPlayer } from "@/utils/types/match";
+import {
+  Match,
+  ScheduledMatch,
+  SquadPlayer,
+  UpdatedMatch,
+} from "@/utils/types/match";
 
 export const createMatch = async (enteredMatchData: Match) => {
   const response = await fetch("/api/admin/post-match", {
@@ -52,14 +57,14 @@ export const getMatchById = async (id: string): Promise<ScheduledMatch> => {
   return response.json();
 };
 
-export const updateMatch = async (id: string, matchData: Match) => {
-  const response = await fetch(`/api/matches/edit-match/${id}`, {
+export const updateMatch = async (matchData: UpdatedMatch) => {
+  const response = await fetch(`/api/matches/edit-match/${matchData._id}`, {
     method: "PATCH",
-    body: JSON.stringify({ id, matchData }),
+    body: JSON.stringify(matchData),
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-  return response.json();
+  /*  return response.json(); */
 };
