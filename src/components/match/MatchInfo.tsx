@@ -18,9 +18,7 @@ export const MatchInfo: React.FC<Props> = ({ match }) => {
         <p>
           {match.gameType} match at {match.arena}
         </p>
-        <p>
-          {match.date} {match.time}
-        </p>
+        <p>{match.date}</p>
       </div>
     </div>
   );
