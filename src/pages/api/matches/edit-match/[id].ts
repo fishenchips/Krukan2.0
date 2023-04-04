@@ -23,7 +23,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           arena: data.arena,
           opposition: data.opposition,
           date: data.date,
-          shortDate: data.shortDate,
           gameType: data.gameType,
         },
       }
