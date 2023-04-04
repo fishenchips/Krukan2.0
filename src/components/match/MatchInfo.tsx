@@ -16,7 +16,8 @@ export const MatchInfo: React.FC<Props> = ({ match }) => {
             : `${match.opposition} - FC Krukan (A)`}
         </h4>
         <p>
-          {match.gameType} match at {match.arena}
+          {match.gameType.charAt(0).toUpperCase() + match.gameType.slice(1)}{" "}
+          match at {match.arena}
         </p>
         <p>{match.date}</p>
       </div>

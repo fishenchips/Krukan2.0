@@ -1,7 +1,6 @@
 import { Switch, useToast } from "@chakra-ui/react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useQueryClient } from "@tanstack/react-query";
-import dayjs from "dayjs";
 
 import { useCreateMatch } from "@/queries/matches/hooks/useCreateMatch";
 import { matchesKey } from "@/queries/matches/hooks/useGetMatches";
@@ -14,7 +13,6 @@ export const NewMatchForm = () => {
       arena: "",
       opposition: "",
       date: "",
-      shortDate: "",
       gameType: "",
     },
   });
@@ -28,8 +26,7 @@ export const NewMatchForm = () => {
       home: watch("home"),
       arena: watch("arena"),
       opposition: watch("opposition"),
-      date: dayjs(watch("date")).format("dddd, D/M HH:mm"),
-      shortDate: dayjs(watch("date")).format("ddd, D/M"),
+      date: watch("date"),
       gameType: watch("gameType"),
     },
     {

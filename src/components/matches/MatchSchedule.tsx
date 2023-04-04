@@ -2,6 +2,7 @@ import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Loading } from "../layout/Loading";
+import dayjs from "dayjs";
 
 export const MatchSchedule = () => {
   const { push } = useRouter();
@@ -30,8 +31,12 @@ export const MatchSchedule = () => {
                 key={match._id}
                 onClick={() => push(`/matches/${match._id}`)}
               >
-                <MatchTimeTypeArena>{match.date}</MatchTimeTypeArena>
-                <ShortDate>{match.shortDate}</ShortDate>
+                <MatchTimeTypeArena>
+                  {dayjs(match.date).format("dddd, D/M HH:mm")}
+                </MatchTimeTypeArena>
+                <ShortDate>
+                  {dayjs(match.date).format("ddd, D/M HH:mm")}
+                </ShortDate>
                 <MatchTd>
                   {match.home
                     ? `Krukan - ${match.opposition} `
