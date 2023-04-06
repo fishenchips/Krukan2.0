@@ -1,5 +1,6 @@
 import { Match } from "@/utils/types/match";
 import Link from "next/link";
+import dayjs from "dayjs";
 
 interface Props {
   match: Match;
@@ -19,7 +20,7 @@ export const MatchInfo: React.FC<Props> = ({ match }) => {
           {match.gameType.charAt(0).toUpperCase() + match.gameType.slice(1)}{" "}
           match at {match.arena}
         </p>
-        <p>{match.date}</p>
+        <p>{dayjs(match.date).format("dddd, D/M HH:mm")}</p>
       </div>
     </div>
   );
