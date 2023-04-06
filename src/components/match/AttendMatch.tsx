@@ -75,7 +75,7 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
   );
 };
 
-const Button = styled.button`
+export const Button = styled.button`
   padding: 0.5rem 1rem;
   cursor: pointer;
   color: white;

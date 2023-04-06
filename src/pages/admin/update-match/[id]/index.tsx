@@ -2,6 +2,7 @@ import { Loading } from "@/components/layout/Loading";
 import { UpdateMatch } from "@/components/matches/UpdateMatch";
 import { useGetMatchById } from "@/queries/matches/hooks/useGetMatchById";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 const UpdateMatchPage = () => {
@@ -23,14 +24,17 @@ const UpdateMatchPage = () => {
   }
 
   return (
-    <UpdateMatch
-      _id={match._id}
-      home={match.home}
-      arena={match.arena}
-      date={match.date}
-      gameType={match.gameType}
-      opposition={match.opposition}
-    />
+    <>
+      <Link href={"/admin"}>Matches</Link>
+      <UpdateMatch
+        _id={match._id}
+        home={match.home}
+        arena={match.arena}
+        date={match.date}
+        gameType={match.gameType}
+        opposition={match.opposition}
+      />
+    </>
   );
 };
 
