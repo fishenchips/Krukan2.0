@@ -11,9 +11,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const matches = await matchesCollection.find().sort({ date: 1 }).toArray();
 
+    const today = new Date().toISOString();
+
+    const upcomingMatches = matches.filter((match) => match.date > today);
+
     client.close();
 
-    res.status(200).json(matches);
+    res.status(200).json(upcomingMatches);
   }
 };
 

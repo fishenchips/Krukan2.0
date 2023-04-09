@@ -1,0 +1,7 @@
+.nextMatch a,
+.nextMatch a:visited {
+  text-decoration: none;
+  color: #80051b;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
