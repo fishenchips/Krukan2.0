@@ -18,7 +18,6 @@ export const LandingPage = () => {
           </p>
         )}
       </div>
-      <SocialMedia />
     </>
   );
 };

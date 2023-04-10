@@ -7,6 +7,10 @@
   }
 }
 
+.linksDiv {
+  margin-top: 2rem;
+}
+
 .facebook,
 .facebook:visited {
   font-size: 1.5rem;

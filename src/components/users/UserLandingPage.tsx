@@ -1,11 +1,9 @@
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { Loading } from "../layout/Loading";
 import { UserInfoForm } from "./UserInfoForm";
 import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import styles from "./UserLandingPage.module.css";
 import { Player } from "@/utils/types/playerInfo";
-import { SocialMedia } from "../layout/SocialMedia";
 
 export const UserLandingPage = () => {
   const { data: session } = useSession();
@@ -24,10 +22,6 @@ export const UserLandingPage = () => {
           <p className={styles.welcomeMsg}>
             Welcome back {loggedInUser?.info.firstName}.
           </p>
-          <div>
-            <Link href={"/matches"}> Go to matches</Link>
-          </div>
-          <SocialMedia />
         </>
       ) : (
         <div>

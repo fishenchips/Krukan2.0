@@ -1,4 +1,5 @@
 import { LandingPage } from "@/components/layout/Home";
+import { SocialMedia } from "@/components/layout/SocialMedia";
 import { NextMatch } from "@/components/match/NextMatch";
 import { UserLandingPage } from "@/components/users/UserLandingPage";
 import { useSession } from "next-auth/react";
@@ -8,7 +9,9 @@ const Home = () => {
 
   return (
     <div>
-      {session ? <UserLandingPage /> : <LandingPage />} <NextMatch />
+      {session ? <UserLandingPage /> : <LandingPage />}
+      <NextMatch />
+      <SocialMedia />
     </div>
   );
 };
