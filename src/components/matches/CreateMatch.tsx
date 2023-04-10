@@ -1,5 +1,11 @@
+import Link from "next/link";
 import { NewMatchForm } from "./NewMatchForm";
 
 export const NewMatch = () => {
-  return <NewMatchForm />;
+  return (
+    <>
+      <Link href={"/admin"}>Matches</Link>
+      <NewMatchForm />
+    </>
+  );
 };
