@@ -8,10 +8,14 @@ interface Props {
 export const MatchRoster: React.FC<Props> = ({ roster }) => {
   if (!roster) return <p>No players are attending this match.</p>;
 
-  const goalkeepers = roster.filter((p) => p.info.position === "goal-keeper");
-  const defenders = roster.filter((p) => p.info.position === "defender");
-  const midfielders = roster.filter((p) => p.info.position === "midfielder");
-  const strikers = roster.filter((p) => p.info.position === "striker");
+  const goalkeepers = roster.filter(
+    ({ info }) => info.position === "goal-keeper"
+  );
+  const defenders = roster.filter(({ info }) => info.position === "defender");
+  const midfielders = roster.filter(
+    ({ info }) => info.position === "midfielder"
+  );
+  const strikers = roster.filter(({ info }) => info.position === "striker");
 
   return (
     <>
@@ -27,13 +31,11 @@ export const MatchRoster: React.FC<Props> = ({ roster }) => {
                 {goalkeepers.length < 1 ? (
                   <p>-</p>
                 ) : (
-                  goalkeepers.map((gk) => {
-                    return (
-                      <p key={gk._id}>
-                        {gk.info.firstName} {gk.info.lastName}
-                      </p>
-                    );
-                  })
+                  goalkeepers.map((gk) => (
+                    <p key={gk._id}>
+                      {gk.info.firstName} {gk.info.lastName}
+                    </p>
+                  ))
                 )}
               </div>
             </div>
@@ -43,13 +45,11 @@ export const MatchRoster: React.FC<Props> = ({ roster }) => {
                 {defenders.length < 1 ? (
                   <p>-</p>
                 ) : (
-                  defenders.map((d) => {
-                    return (
-                      <p key={d._id}>
-                        {d.info.firstName} {d.info.lastName}
-                      </p>
-                    );
-                  })
+                  defenders.map((d) => (
+                    <p key={d._id}>
+                      {d.info.firstName} {d.info.lastName}
+                    </p>
+                  ))
                 )}
               </div>
             </div>
@@ -59,13 +59,11 @@ export const MatchRoster: React.FC<Props> = ({ roster }) => {
                 {midfielders.length < 1 ? (
                   <p>-</p>
                 ) : (
-                  midfielders.map((m) => {
-                    return (
-                      <p key={m._id}>
-                        {m.info.firstName} {m.info.lastName}
-                      </p>
-                    );
-                  })
+                  midfielders.map((m) => (
+                    <p key={m._id}>
+                      {m.info.firstName} {m.info.lastName}
+                    </p>
+                  ))
                 )}
               </div>
             </div>
@@ -75,13 +73,11 @@ export const MatchRoster: React.FC<Props> = ({ roster }) => {
                 {strikers.length < 1 ? (
                   <p>-</p>
                 ) : (
-                  strikers.map((s) => {
-                    return (
-                      <p key={s._id}>
-                        {s.info.firstName} {s.info.lastName}
-                      </p>
-                    );
-                  })
+                  strikers.map((s) => (
+                    <p key={s._id}>
+                      {s.info.firstName} {s.info.lastName}
+                    </p>
+                  ))
                 )}
               </div>
             </div>
