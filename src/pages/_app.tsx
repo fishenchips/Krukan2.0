@@ -6,7 +6,17 @@ import { Layout } from "@/components/layout/Layout";
 import { ChakraProvider } from "@chakra-ui/react";
 
 const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 600000,
+        cacheTime: 900000,
+        refetchOnMount: false,
+        refetchOnReconnect: false,
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
 
   return (
     <ChakraProvider resetCSS={false}>
