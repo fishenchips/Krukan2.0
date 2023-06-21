@@ -17,11 +17,14 @@ export const MatchRoster: React.FC<Props> = ({ roster }) => {
   );
   const strikers = roster.filter(({ info }) => info.position === "striker");
 
+  //fixing bug with some player attending with empty object
+  const playerAmount = roster.filter(({ info }) => info.position!.length > 0);
+
   return (
     <>
       {roster.length > 0 ? (
         <div>
-          <p>{roster.length} Available players</p>
+          <p>{playerAmount.length} available players</p>
           <StyledPositions>
             <div>
               <StyledPosition $position={"#f72f2f"}>
