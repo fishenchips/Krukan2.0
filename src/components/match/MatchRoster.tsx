@@ -1,11 +1,13 @@
 import { Roster } from "@/utils/types/match";
 import { StyledPosition, StyledPositions } from "./styled";
+import { useState } from "react";
 
 interface Props {
   roster?: Roster;
 }
 
 export const MatchRoster: React.FC<Props> = ({ roster }) => {
+  const [playerAmount, setPlayerAmount] = useState<number>(0);
   if (!roster) return <p>No players are attending this match.</p>;
 
   const goalkeepers = roster.filter(
@@ -18,13 +20,17 @@ export const MatchRoster: React.FC<Props> = ({ roster }) => {
   const strikers = roster.filter(({ info }) => info.position === "striker");
 
   //fixing bug with some player attending with empty object
-  const playerAmount = roster.filter(({ info }) => info.position!.length > 0);
+  roster.forEach((player) => {
+    if (player.info.firstName) {
+      setPlayerAmount((prev) => prev + 1);
+    }
+  });
 
   return (
     <>
       {roster.length > 0 ? (
         <div>
-          <p>{playerAmount.length} available players</p>
+          <p>{playerAmount} available players</p>
           <StyledPositions>
             <div>
               <StyledPosition $position={"#f72f2f"}>
