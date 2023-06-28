@@ -8,6 +8,7 @@ import {
 import styled from "styled-components";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { GrLogin } from "react-icons/gr";
+import { RiAdminLine } from "react-icons/ri";
 import Link from "next/link";
 import { BiHome, BiFootball } from "react-icons/bi";
 import { useSession } from "next-auth/react";
@@ -37,6 +38,9 @@ export const HamburgerMenu = () => {
             Login
           </MenuItem>
         )}
+        <MenuItem icon={<RiAdminLine />} as={Link} href="/admin">
+          Admin
+        </MenuItem>
       </StyledMenuList>
     </Menu>
   );

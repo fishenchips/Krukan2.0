@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { SignInButton } from "./SignInButton";
 import { SignOutButton } from "./SignOutButton";
 import { BiFootball } from "react-icons/bi";
+import { RiAdminLine } from "react-icons/ri";
 import { HamburgerMenu } from "./HamburgerMenu";
 
 export const Header = () => {
@@ -36,6 +37,12 @@ export const Header = () => {
           ) : (
             <SignInButton />
           )}
+        </div>
+        <div className={styled.title} onClick={() => push("/admin")}>
+          <span>
+            <RiAdminLine />
+          </span>
+          <span>Admin</span>
         </div>
       </div>
     </header>
