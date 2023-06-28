@@ -14,6 +14,7 @@ const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
         refetchOnMount: false,
         refetchOnReconnect: false,
         refetchOnWindowFocus: false,
+        retry: 1,
       },
     },
   });

@@ -7,9 +7,7 @@ import styled from "./NextMatch.module.css";
 export const NextMatch = () => {
   const { data: nextMatch, isLoading, isError } = useGetNextMatch();
 
-  if (isLoading) return <Loading />;
-
-  if (isError) return <></>;
+  if (isError || isLoading) return <></>;
 
   return (
     <div className={styled.nextMatch}>
