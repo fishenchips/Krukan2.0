@@ -25,8 +25,14 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
       _id: loggedInUser?._id as string,
       email: loggedInUser?.email as string,
       info: {
-        firstName: loggedInUser?.info.firstName,
-        lastName: loggedInUser?.info.lastName,
+        firstName: ((loggedInUser?.info.firstName
+          ?.charAt(0)
+          .toUpperCase() as string) +
+          loggedInUser?.info.firstName?.slice(1)) as string,
+        lastName: ((loggedInUser?.info.lastName
+          ?.charAt(0)
+          .toUpperCase() as string) +
+          loggedInUser?.info.lastName?.slice(1)) as string,
         position: loggedInUser?.info.position,
       },
     },
