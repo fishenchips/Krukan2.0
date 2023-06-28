@@ -1,5 +1,4 @@
 import { useGetNextMatch } from "@/queries/matches/hooks/useGetNextMatch";
-import { Loading } from "../layout/Loading";
 import dayjs from "dayjs";
 import Link from "next/link";
 import styled from "./NextMatch.module.css";
