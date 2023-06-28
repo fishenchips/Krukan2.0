@@ -6,22 +6,29 @@ interface Props {
 }
 
 export const MatchRoster: React.FC<Props> = ({ roster }) => {
-  if (!roster) return <p>No players are attending this match.</p>;
+  // Fix bug where empty player object is stored in DB
+  const filteredRoster = roster?.filter((player) => player._id);
 
-  const goalkeepers = roster.filter(
+  if (!filteredRoster) return <p>No players are attending this match.</p>;
+
+  const goalkeepers = filteredRoster.filter(
     ({ info }) => info.position === "goal-keeper"
   );
-  const defenders = roster.filter(({ info }) => info.position === "defender");
-  const midfielders = roster.filter(
+  const defenders = filteredRoster.filter(
+    ({ info }) => info.position === "defender"
+  );
+  const midfielders = filteredRoster.filter(
     ({ info }) => info.position === "midfielder"
   );
-  const strikers = roster.filter(({ info }) => info.position === "striker");
+  const strikers = filteredRoster.filter(
+    ({ info }) => info.position === "striker"
+  );
 
   return (
     <>
-      {roster.length > 0 ? (
+      {filteredRoster.length > 0 ? (
         <div>
-          <p>{roster.length} available players</p>
+          <p>{filteredRoster.length} available players</p>
           <StyledPositions>
             <div>
               <StyledPosition $position={"#f72f2f"}>
