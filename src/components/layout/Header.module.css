@@ -11,12 +11,11 @@
 
 .banner {
   display: flex;
-  margin-left: 1rem;
+  margin-left: 3rem;
 }
 
 .userHub {
   cursor: pointer;
-  margin-right: 1rem;
 }
 
 .title {
@@ -40,5 +39,6 @@
     width: 15rem;
     display: flex;
     justify-content: space-between;
+    margin-right: 3rem;
   }
 }
