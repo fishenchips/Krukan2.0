@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react";
 import styled from "styled-components";
-import { SocialMedia } from "./SocialMedia";
 
 export const LandingPage = () => {
   const { data: session } = useSession();

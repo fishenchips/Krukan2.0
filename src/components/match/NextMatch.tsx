@@ -8,6 +8,8 @@ export const NextMatch = () => {
 
   if (isError || isLoading) return <></>;
 
+  const filteredRoster = nextMatch.roster?.filter((player) => player._id);
+
   return (
     <div className={styled.nextMatch}>
       <h3>Next Match:</h3>
@@ -20,7 +22,7 @@ export const NextMatch = () => {
         <p>
           {dayjs(nextMatch.date).format("dddd, D/M HH:mm")} at {nextMatch.arena}
         </p>
-        <p>Available players: {nextMatch.roster?.length}</p>
+        <p>Available players: {filteredRoster ? filteredRoster.length : 0}</p>
         <Link href={`/matches/${nextMatch._id}`}>Go to match</Link>
       </div>
     </div>
