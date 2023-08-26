@@ -28,7 +28,7 @@ const MatchPage = () => {
       {session ? (
         <AttendMatch matchId={id as string} roster={match.roster} />
       ) : (
-        <p>Log in to attend match!</p>
+        <p style={{ color: "rgb(80, 80, 80)" }}>Log in to attend match!</p>
       )}
       <MatchRoster roster={match.roster} />
     </>

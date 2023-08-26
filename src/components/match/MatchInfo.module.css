@@ -1,0 +1,15 @@
+.link,
+.link:visited {
+  text-decoration: none;
+  color: rgb(80, 80, 80);
+  font-size: 0.85em;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.textSecond {
+  color: rgb(80, 80, 80);
+  font-size: 0.85em;
+}

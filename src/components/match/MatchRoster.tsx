@@ -1,5 +1,6 @@
 import { Roster } from "@/utils/types/match";
 import { StyledPosition, StyledPositions } from "./styled";
+import styles from "./MatchInfo.module.css";
 
 interface Props {
   roster?: Roster;
@@ -27,7 +28,7 @@ export const MatchRoster: React.FC<Props> = ({ roster }) => {
   return (
     <>
       {filteredRoster.length > 0 ? (
-        <div>
+        <div className={styles.textSecond}>
           <p>{filteredRoster.length} available players</p>
           <StyledPositions>
             <div>
