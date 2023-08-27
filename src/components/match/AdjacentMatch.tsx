@@ -16,33 +16,32 @@ export const AdjacentMatch: React.FC<Props> = ({ prevMatch, nextMatch }) => {
 
   const onNavigateNext = () => push(`/matches/${nextMatch?.id}`);
 
-  console.log(nextMatch);
-
   return (
     <div className={styles.adjacentMatchDiv}>
-      {prevMatch?.id && (
+      {prevMatch && (
         <button
           className={styles.adjacentMatchBtn}
-          disabled={!prevMatch?.id}
           onClick={() => onNavigatePrev()}
         >
           <div>
             <AiOutlineArrowLeft />
-            <span>{prevMatch?.opposition}</span>
+            <span>
+              {prevMatch.opposition} {prevMatch.home ? "(H)" : "(A)"}
+            </span>
           </div>
         </button>
       )}
       <div>
-        <button
-          className={styles.adjacentMatchBtn}
-          disabled={!nextMatch?.id}
-          onClick={onNavigateNext}
-        >
-          <div>
-            <span>{nextMatch?.opposition}</span>
-            <AiOutlineArrowRight />
-          </div>
-        </button>
+        {nextMatch && (
+          <button className={styles.adjacentMatchBtn} onClick={onNavigateNext}>
+            <div>
+              <span>
+                {nextMatch.opposition} {nextMatch.home ? "(H)" : "(A)"}
+              </span>
+              <AiOutlineArrowRight />
+            </div>
+          </button>
+        )}
       </div>
     </div>
   );
