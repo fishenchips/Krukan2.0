@@ -19,3 +19,9 @@ export interface ScheduledMatch extends UpdatedMatch {
 }
 
 export type Roster = Array<SquadPlayer>;
+
+export interface AdjacentMatch {
+  id?: string;
+  opposition?: string;
+  home?: boolean;
+}

@@ -1,7 +1,7 @@
-import { Match } from "@/utils/types/match";
 import Link from "next/link";
 import dayjs from "dayjs";
 
+import { Match } from "@/utils/types/match";
 import styles from "./MatchInfo.module.css";
 
 interface Props {

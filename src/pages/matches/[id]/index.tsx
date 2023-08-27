@@ -5,17 +5,46 @@ import { AttendMatch } from "@/components/match/AttendMatch";
 import { MatchRoster } from "@/components/match/MatchRoster";
 import { MatchInfo } from "@/components/match/MatchInfo";
 import { useSession } from "next-auth/react";
+import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
+import { AdjacentMatch } from "@/utils/types/match";
+import { useEffect, useState } from "react";
 
 const MatchPage = () => {
   const {
     query: { id },
     isReady,
   } = useRouter();
+  const [prevMatch, setPrevMatch] = useState<AdjacentMatch>();
+  const [nextMatch, setNextMatch] = useState<AdjacentMatch>();
 
   const { data: session } = useSession();
 
   const { data: match, isLoading } = useGetMatchById(id as string);
 
+  const { data: matches } = useGetMatches();
+  const matchIndex = matches?.findIndex((m) => m._id === match?._id);
+
+  useEffect(() => {
+    const prev = matches?.find(
+      (m) => m === matches[(matchIndex as number) - 1]
+    );
+    setPrevMatch({
+      id: prev?._id,
+      opposition: prev?.opposition,
+      home: prev?.home,
+    });
+    const next = matches?.find(
+      (m) => m === matches[(matchIndex as number) + 1]
+    );
+    setNextMatch({
+      id: next?._id,
+      opposition: next?.opposition,
+      home: next?.home,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  console.log(nextMatch);
   if (isLoading || !isReady) return <Loading />;
 
   if (!match) {
@@ -28,7 +57,7 @@ const MatchPage = () => {
       {session ? (
         <AttendMatch matchId={id as string} roster={match.roster} />
       ) : (
-        <p style={{ color: "rgb(80, 80, 80)" }}>Log in to attend match!</p>
+        <i style={{ color: "rgb(80, 80, 80)" }}>Log in to attend match</i>
       )}
       <MatchRoster roster={match.roster} />
     </>
