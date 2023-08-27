@@ -6,6 +6,7 @@ import { Roster } from "@/utils/types/match";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import styled from "styled-components";
+import { Loading } from "../layout/Loading";
 
 interface Props {
   matchId: string;
@@ -16,7 +17,7 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
-  const { data: loggedInUser } = useGetLoggedInUser(
+  const { data: loggedInUser, isLoading } = useGetLoggedInUser(
     session?.user?.email as string
   );
 
@@ -69,6 +70,10 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
   const alreadyAttending = roster?.some(
     (player) => player._id === loggedInUser?._id
   );
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div>
