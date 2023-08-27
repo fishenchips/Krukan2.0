@@ -15,8 +15,8 @@ const MatchPage = () => {
     query: { id },
     isReady,
   } = useRouter();
-  const [prevMatch, setPrevMatch] = useState<AdjacentMatchType>();
-  const [nextMatch, setNextMatch] = useState<AdjacentMatchType>();
+  const [prevMatch, setPrevMatch] = useState<AdjacentMatchType | undefined>();
+  const [nextMatch, setNextMatch] = useState<AdjacentMatchType | undefined>();
 
   const { data: session } = useSession();
 
@@ -29,19 +29,27 @@ const MatchPage = () => {
     const prev = matches?.find(
       (m) => m === matches[(matchIndex as number) - 1]
     );
-    setPrevMatch({
-      id: prev?._id,
-      opposition: prev?.opposition,
-      home: prev?.home,
-    });
+    setPrevMatch(
+      prev
+        ? {
+            id: prev?._id,
+            opposition: prev?.opposition,
+            home: prev?.home,
+          }
+        : undefined
+    );
     const next = matches?.find(
       (m) => m === matches[(matchIndex as number) + 1]
     );
-    setNextMatch({
-      id: next?._id,
-      opposition: next?.opposition,
-      home: next?.home,
-    });
+    setNextMatch(
+      next
+        ? {
+            id: next?._id,
+            opposition: next?.opposition,
+            home: next?.home,
+          }
+        : undefined
+    );
   }, [matchIndex, matches]);
 
   if (isLoading || !isReady) return <Loading />;

@@ -17,8 +17,24 @@
 .adjacentMatchDiv {
   display: flex;
   gap: 0 2rem;
+  margin-bottom: 1rem;
 }
 
-.disabledLink {
-  pointer-events: none;
+.adjacentMatchBtn {
+  border-color: #80051b;
+  border-radius: 2rem;
+  border-style: solid;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: white;
+  color: #a80623;
+}
+
+.adjacentMatchBtn div {
+  display: flex;
+  justify-content: center;
+}
+
+.adjacentMatchBtn:disabled {
+  cursor: not-allowed;
 }

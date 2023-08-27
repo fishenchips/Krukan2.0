@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
-import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from "react-icons/ai";
 
 import type { AdjacentMatchType } from "@/utils/types/match";
 import styles from "./MatchInfo.module.css";
 
 interface Props {
-  prevMatch?: AdjacentMatchType;
-  nextMatch?: AdjacentMatchType;
+  prevMatch: AdjacentMatchType | undefined;
+  nextMatch: AdjacentMatchType | undefined;
 }
 
 export const AdjacentMatch: React.FC<Props> = ({ prevMatch, nextMatch }) => {
@@ -16,19 +16,31 @@ export const AdjacentMatch: React.FC<Props> = ({ prevMatch, nextMatch }) => {
 
   const onNavigateNext = () => push(`/matches/${nextMatch?.id}`);
 
+  console.log(nextMatch);
+
   return (
     <div className={styles.adjacentMatchDiv}>
-      <button disabled={!prevMatch?.id} onClick={() => onNavigatePrev()}>
-        <div>
-          <BsArrowLeftCircle />
-          <span>{prevMatch?.opposition}</span>
-        </div>
-      </button>
+      {prevMatch?.id && (
+        <button
+          className={styles.adjacentMatchBtn}
+          disabled={!prevMatch?.id}
+          onClick={() => onNavigatePrev()}
+        >
+          <div>
+            <AiOutlineArrowLeft />
+            <span>{prevMatch?.opposition}</span>
+          </div>
+        </button>
+      )}
       <div>
-        <button disabled={!nextMatch} onClick={onNavigateNext}>
+        <button
+          className={styles.adjacentMatchBtn}
+          disabled={!nextMatch?.id}
+          onClick={onNavigateNext}
+        >
           <div>
             <span>{nextMatch?.opposition}</span>
-            <BsArrowRightCircle />
+            <AiOutlineArrowRight />
           </div>
         </button>
       </div>
