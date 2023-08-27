@@ -3,7 +3,9 @@ import { Html, Head, Main, NextScript } from "next/document";
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <link rel="shortcut icon" href="/favicon/favicon.ico" />
+      </Head>
       <body style={{ margin: 0, padding: 0, boxSizing: "border-box" }}>
         <Main />
         <NextScript />
