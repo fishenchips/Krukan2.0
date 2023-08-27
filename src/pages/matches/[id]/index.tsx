@@ -6,16 +6,17 @@ import { MatchRoster } from "@/components/match/MatchRoster";
 import { MatchInfo } from "@/components/match/MatchInfo";
 import { useSession } from "next-auth/react";
 import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
-import { AdjacentMatch } from "@/utils/types/match";
+import type { AdjacentMatchType } from "@/utils/types/match";
 import { useEffect, useState } from "react";
+import { AdjacentMatch } from "@/components/match/AdjacentMatch";
 
 const MatchPage = () => {
   const {
     query: { id },
     isReady,
   } = useRouter();
-  const [prevMatch, setPrevMatch] = useState<AdjacentMatch>();
-  const [nextMatch, setNextMatch] = useState<AdjacentMatch>();
+  const [prevMatch, setPrevMatch] = useState<AdjacentMatchType>();
+  const [nextMatch, setNextMatch] = useState<AdjacentMatchType>();
 
   const { data: session } = useSession();
 
@@ -41,10 +42,8 @@ const MatchPage = () => {
       opposition: next?.opposition,
       home: next?.home,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [matchIndex, matches]);
 
-  console.log(nextMatch);
   if (isLoading || !isReady) return <Loading />;
 
   if (!match) {
@@ -53,6 +52,7 @@ const MatchPage = () => {
 
   return (
     <>
+      <AdjacentMatch prevMatch={prevMatch} nextMatch={nextMatch} />
       <MatchInfo match={match} />
       {session ? (
         <AttendMatch matchId={id as string} roster={match.roster} />

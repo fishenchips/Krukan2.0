@@ -13,3 +13,12 @@
   color: rgb(80, 80, 80);
   font-size: 0.85em;
 }
+
+.adjacentMatchDiv {
+  display: flex;
+  gap: 0 2rem;
+}
+
+.disabledLink {
+  pointer-events: none;
+}
