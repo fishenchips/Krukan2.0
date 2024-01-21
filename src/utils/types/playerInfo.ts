@@ -12,3 +12,8 @@ export type PlayerInfo = {
 };
 
 type Position = "goal-keeper" | "defender" | "midfielder" | "striker";
+
+export interface LeaderBoardPlayer
+  extends Omit<Player, "email" | "emailVerified"> {
+  score: number;
+}

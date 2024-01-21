@@ -1,4 +1,6 @@
+import { PlayerList } from "@/components/layout/PlayerList";
+
 const EditPlayerLeaderboardPage = () => {
-  return <p>page</p>;
+  return <PlayerList />;
 };
 export default EditPlayerLeaderboardPage;
