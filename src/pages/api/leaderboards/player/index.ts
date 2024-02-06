@@ -7,7 +7,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const players = req.body as Array<LeaderBoardPlayer>;
     const playerstoUpdate = {};
     players.forEach((player) => {
-      playerstoUpdate[player._id] = player.score;
+      playerstoUpdate[player._id] = {
+        info: player.info,
+        score: player.score,
+      };
     });
 
     const client = await MongoClient.connect(process.env.MONGODB_URI as string);
@@ -21,10 +24,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const playerLeaderboard = db.collection("player-leaderboard");
 
     try {
-      const update = Object.entries(playerstoUpdate).map(([id, score]) => ({
+      const update = players.map((player) => ({
         updateOne: {
-          filter: { _id: new ObjectId(id) },
-          update: { $inc: { score: Number(score) } },
+          filter: { _id: new ObjectId(player._id) },
+          update: {
+            $inc: { score: Number(player.score) },
+            $set: { info: player.info },
+          },
           upsert: true,
         },
       }));
