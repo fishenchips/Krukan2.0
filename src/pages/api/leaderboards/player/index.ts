@@ -5,6 +5,10 @@ import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "PATCH") {
     const players = req.body as Array<LeaderBoardPlayer>;
+    const playerstoUpdate = {};
+    players.forEach((player) => {
+      playerstoUpdate[player._id] = player.score;
+    });
 
     const client = await MongoClient.connect(process.env.MONGODB_URI as string);
 
@@ -17,23 +21,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const playerLeaderboard = db.collection("player-leaderboard");
 
     try {
-      const playersToUpdate = players.map((player) => ({
+      const update = Object.entries(playerstoUpdate).map(([id, score]) => ({
         updateOne: {
-          filter: { _id: new ObjectId(player._id) },
-          update: { $inc: { score: player.score } },
+          filter: { _id: new ObjectId(id) },
+          update: { $inc: { score: Number(score) } },
+          upsert: true,
         },
       }));
 
-      await playerLeaderboard.bulkWrite(playersToUpdate);
+      await playerLeaderboard.bulkWrite(update);
 
       res
         .status(200)
-        .json({ message: "players added to leaderboard", players });
+        .json({ message: "Players added to leaderboard", playerstoUpdate });
     } catch (error) {
       console.error(error);
+    } finally {
+      client.close();
     }
-
-    await client.close();
   }
 };
 
