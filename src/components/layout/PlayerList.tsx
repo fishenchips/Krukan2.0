@@ -3,6 +3,8 @@ import styles from "./PlayerList.module.css";
 
 import { useGetAllPlayers } from "@/queries/users/hooks/useGetAllPlayers";
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
+import { useUpdatePlayerLeaderboard } from "@/queries/leaderboards/player-leaderboard/hooks/useUpdatePlayerLeaderboard";
+import { updatePlayerLeaderboard } from "@/queries/leaderboards/player-leaderboard/player-queries";
 
 export const PlayerList = () => {
   const [playersToAdd, setPlayersToAdd] = useState<Array<LeaderBoardPlayer>>(
@@ -10,9 +12,13 @@ export const PlayerList = () => {
   );
   const { data: players, isLoading } = useGetAllPlayers();
 
+  const { mutate } = useUpdatePlayerLeaderboard(playersToAdd);
+
   if (isLoading) return <></>;
 
-  const filteredPlayerList = players?.filter((player) => player.info);
+  const filteredPlayerList = players?.filter(
+    (player: LeaderBoardPlayer) => player.info
+  );
 
   const handleAddPlayer = (player: LeaderBoardPlayer) => {
     const existingPlayer = playersToAdd.find(({ _id }) => player._id === _id);
@@ -36,8 +42,8 @@ export const PlayerList = () => {
     }
   };
 
-  const handleSubmitPlayers = () => {
-    console.log(playersToAdd);
+  const handleSubmitPlayers = (): void => {
+    mutate();
   };
 
   return (

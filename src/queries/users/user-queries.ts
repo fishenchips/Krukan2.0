@@ -1,5 +1,5 @@
 import {
-  LeaderBoardPlayers,
+  LeaderBoardPlayer,
   Player,
   PlayerInfo,
 } from "@/utils/types/playerInfo";
@@ -22,5 +22,5 @@ export const addUserInfo = async (enteredUserData: PlayerInfo) => {
   return response.json();
 };
 
-export const getPlayers = async (): Promise<LeaderBoardPlayers> =>
+export const getPlayers = async (): Promise<Array<LeaderBoardPlayer>> =>
   (await fetch(`/api/players`)).json();
