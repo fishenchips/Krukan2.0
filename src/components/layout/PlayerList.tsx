@@ -4,7 +4,6 @@ import styles from "./PlayerList.module.css";
 import { useGetAllPlayers } from "@/queries/users/hooks/useGetAllPlayers";
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
 import { useUpdatePlayerLeaderboard } from "@/queries/leaderboards/player-leaderboard/hooks/useUpdatePlayerLeaderboard";
-import { updatePlayerLeaderboard } from "@/queries/leaderboards/player-leaderboard/player-queries";
 
 export const PlayerList = () => {
   const [playersToAdd, setPlayersToAdd] = useState<Array<LeaderBoardPlayer>>(

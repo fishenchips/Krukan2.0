@@ -6,7 +6,7 @@ import { ApiError } from "next/dist/server/api-utils";
 export const playersKey = "players";
 
 export const useGetAllPlayers = (
-  options?: UseQueryOptions<unknown, ApiError, LeaderBoardPlayer>
+  options?: UseQueryOptions<unknown, ApiError, Array<LeaderBoardPlayer>>
 ) =>
   useQuery({
     queryKey: [playersKey],
