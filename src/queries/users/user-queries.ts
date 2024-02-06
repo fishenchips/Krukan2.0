@@ -1,4 +1,8 @@
-import { Player, PlayerInfo } from "@/utils/types/playerInfo";
+import {
+  LeaderBoardPlayer,
+  Player,
+  PlayerInfo,
+} from "@/utils/types/playerInfo";
 
 export const getLoggedInUser = async (email: string): Promise<Player> => {
   const response = await fetch(`/api/user/get-user/${email}`);
@@ -17,3 +21,6 @@ export const addUserInfo = async (enteredUserData: PlayerInfo) => {
 
   return response.json();
 };
+
+export const getPlayers = async (): Promise<Array<LeaderBoardPlayer>> =>
+  (await fetch(`/api/players`)).json();
