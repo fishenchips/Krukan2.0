@@ -7,24 +7,40 @@ export const CardComponent = () => {
 
   const sortedArray = testLeaderboard.players.sort((a, b) => b.score - a.score);
 
+  // Function to determine the className based on rank
+  const scoreClass = (rank: number) => {
+    switch (rank) {
+      case 1:
+        return styles.gold;
+      case 2:
+        return styles.silver;
+      case 3:
+        return styles.bronze;
+      default:
+        return styles.score;
+    }
+  };
+
   return (
     <div className={styles.card}>
-      <h4>
-        {testLeaderboard.name}{" "}
-        <FaUserEdit
-          onClick={() => push(`leaderboards/edit/${testLeaderboard.type}`)}
-        />
-      </h4>
-
-      <div>
-        <div className={styles.list}>
-          {sortedArray.map((player, i) => (
-            <span key={player.player}>
-              {i + 1} {player.player}: {player.score}
-            </span>
-          ))}
-        </div>
+      <div className={styles.header}>
+        <h4 className={styles.title}>
+          {testLeaderboard.name}
+          <FaUserEdit
+            className={styles.editIcon}
+            onClick={() => push(`leaderboards/edit/${testLeaderboard.type}`)}
+          />
+        </h4>
       </div>
+      <ul className={styles.list}>
+        {sortedArray.map((player, i) => (
+          <li key={player.player} className={styles.listItem}>
+            <span className={styles.rank}>{i + 1}</span>
+            <span className={styles.playerName}>{player.player}</span>
+            <span className={scoreClass(i + 1)}>{player.score}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -1,10 +1,70 @@
 .card {
-  width: 25rem;
-  padding: 0.5rem;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.editIcon {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #007bff;
 }
 
 .list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.listItem {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.rank {
+  font-weight: bold;
+}
+
+.playerName {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.score {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.gold {
+  font-weight: bold;
+  color: #d4af37;
+}
+
+.silver {
+  font-weight: bold;
+  color: #c0c0c0;
+}
+
+.bronze {
+  font-weight: bold;
+  color: #cd7f32;
 }
