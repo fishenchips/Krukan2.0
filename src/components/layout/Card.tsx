@@ -1,13 +1,19 @@
 import { useRouter } from "next/router";
 import styles from "./Card.module.css";
 import { FaUserEdit } from "react-icons/fa";
+import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
 
-export const CardComponent = () => {
+interface Props {
+  leaderboard: Array<LeaderBoardPlayer>;
+}
+
+export const CardComponent: React.FC<Props> = ({ leaderboard }) => {
   const { push } = useRouter();
 
-  const sortedArray = testLeaderboard.players.sort((a, b) => b.score - a.score);
+  if (!leaderboard) {
+    return <p>No leaderboard active</p>;
+  }
 
-  // Function to determine the className based on rank
   const scoreClass = (rank: number) => {
     switch (rank) {
       case 1:
@@ -25,32 +31,24 @@ export const CardComponent = () => {
     <div className={styles.card}>
       <div className={styles.header}>
         <h4 className={styles.title}>
-          {testLeaderboard.name}
+          Pläääyerr
           <FaUserEdit
             className={styles.editIcon}
-            onClick={() => push(`leaderboards/edit/${testLeaderboard.type}`)}
+            onClick={() => push(`leaderboards/edit/player`)}
           />
         </h4>
       </div>
       <ul className={styles.list}>
-        {sortedArray.map((player, i) => (
-          <li key={player.player} className={styles.listItem}>
+        {leaderboard.map((player, i) => (
+          <li key={player._id} className={styles.listItem}>
             <span className={styles.rank}>{i + 1}</span>
-            <span className={styles.playerName}>{player.player}</span>
+            <span className={styles.playerName}>
+              {player.info.firstName} {player.info.lastName}
+            </span>
             <span className={scoreClass(i + 1)}>{player.score}</span>
           </li>
         ))}
       </ul>
     </div>
   );
-};
-
-const testLeaderboard = {
-  type: "player",
-  name: "Pläääyerr",
-  players: [
-    { player: "Philip", score: 8 },
-    { player: "Erik", score: 2 },
-    { player: "Gabriel", score: 18 },
-  ],
 };

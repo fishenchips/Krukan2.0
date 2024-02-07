@@ -1,50 +1,31 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { MongoClient, ObjectId } from "mongodb";
-import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
+import { MongoClient } from "mongodb";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method === "PATCH") {
-    const players = req.body as Array<LeaderBoardPlayer>;
-    const playerstoUpdate = {};
-    players.forEach((player) => {
-      playerstoUpdate[player._id] = {
-        info: player.info,
-        score: player.score,
-      };
-    });
-
-    const client = await MongoClient.connect(process.env.MONGODB_URI as string);
-
-    const db = client.db();
-
-    if (!db) {
-      return res.status(404).json({ message: "Something went wrong" });
-    }
-
-    const playerLeaderboard = db.collection("player-leaderboard");
+  if (req.method === "GET") {
+    let client;
 
     try {
-      const update = players.map((player) => ({
-        updateOne: {
-          filter: { _id: new ObjectId(player._id) },
-          update: {
-            $inc: { score: Number(player.score) },
-            $set: { info: player.info },
-          },
-          upsert: true,
-        },
-      }));
+      client = await MongoClient.connect(process.env.MONGODB_URI as string);
+      const db = client.db();
+      const playerLeaderboard = db.collection("player-leaderboard");
+      const leaderboardData = await playerLeaderboard.find({}).toArray();
+      leaderboardData.sort(
+        (a: { score: number }, b: { score: number }) => b.score - a.score
+      );
 
-      await playerLeaderboard.bulkWrite(update);
-
-      res
-        .status(200)
-        .json({ message: "Players added to leaderboard", playerstoUpdate });
+      res.status(200).json(leaderboardData);
     } catch (error) {
       console.error(error);
+      res.status(500).json({ message: "Failed to fetch leaderboard data" });
     } finally {
-      client.close();
+      if (client) {
+        client.close();
+      }
     }
+  } else {
+    res.setHeader("Allow", ["GET"]);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 };
 

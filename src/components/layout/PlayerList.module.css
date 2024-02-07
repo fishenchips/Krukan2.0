@@ -1,7 +1,25 @@
+.playerList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
 .player {
   display: flex;
+  margin-bottom: 10px;
 }
 
 .player div {
+  margin: 10px;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.playerToAdd {
+  padding: 10px 0;
+}
+.playerToAdd span {
   margin: 10px;
 }
