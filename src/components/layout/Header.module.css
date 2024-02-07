@@ -11,15 +11,12 @@
 
 .banner {
   display: flex;
-  margin-left: 3rem;
-}
-
-.userHub {
-  cursor: pointer;
+  margin-left: 2rem;
 }
 
 .title {
   cursor: pointer;
+  padding: 0 1rem;
 }
 
 .burger {
@@ -36,9 +33,8 @@
   }
 
   .nonBurger {
-    width: 15rem;
     display: flex;
     justify-content: space-between;
-    margin-right: 3rem;
+    margin-right: 2rem;
   }
 }

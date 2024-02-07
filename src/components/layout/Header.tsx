@@ -6,6 +6,7 @@ import { SignOutButton } from "./SignOutButton";
 import { BiFootball } from "react-icons/bi";
 import { RiAdminLine } from "react-icons/ri";
 import { HamburgerMenu } from "./HamburgerMenu";
+import { GiPodiumWinner } from "react-icons/gi";
 
 export const Header = () => {
   const { data: session, status } = useSession();
@@ -29,7 +30,21 @@ export const Header = () => {
           </span>
           <span>Matches</span>
         </div>
-        <div className={styled.userHub}>
+        <div className={styled.title} onClick={() => push("/leaderboards")}>
+          <span>
+            <GiPodiumWinner />
+          </span>
+          <span>Leaderboards</span>
+        </div>
+
+        <div className={styled.title} onClick={() => push("/admin")}>
+          <span>
+            <RiAdminLine />
+          </span>
+          <span>Admin</span>
+        </div>
+
+        <div className={styled.title}>
           {status === "loading" ? (
             ""
           ) : session ? (
@@ -37,12 +52,6 @@ export const Header = () => {
           ) : (
             <SignInButton />
           )}
-        </div>
-        <div className={styled.title} onClick={() => push("/admin")}>
-          <span>
-            <RiAdminLine />
-          </span>
-          <span>Admin</span>
         </div>
       </div>
     </header>
