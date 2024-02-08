@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef } from "react";
+import { Dispatch, SetStateAction, SyntheticEvent, useRef } from "react";
 import styled from "./index.module.css";
 import { Button } from "@/components/match/AttendMatch";
 import cookieCutter from "cookie-cutter";
@@ -19,15 +19,24 @@ export const AdminLogin: React.FC<Props> = ({ setPassword }) => {
       cookieCutter.set("isAdmin", "admin");
       return;
     }
+  };
 
-    /* check for wrong password and create an animation */
+  const enterClick = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleCheckAdmin();
+    }
   };
 
   return (
     <>
       <div>
         <label htmlFor="admin">Enter Password</label>
-        <input id="admin" type="password" ref={passwordRef} />
+        <input
+          id="admin"
+          type="password"
+          ref={passwordRef}
+          onKeyDown={enterClick}
+        />
         <Button onClick={handleCheckAdmin}>Enter</Button>
       </div>
     </>
