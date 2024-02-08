@@ -7,11 +7,21 @@ const LeaderBoardsPage = () => {
   const { data: playerLeaderboard, isLoading: playerLeaderboardLoading } =
     useGetPlayerLeaderboard();
 
-  if (playerLeaderboardLoading) return <Loading />;
-
   return (
-    <CardComponent leaderboard={playerLeaderboard as LeaderBoardPlayer[]} />
+    <>
+      <CardComponent
+        leaderboard={playerLeaderboard as LeaderBoardPlayer[]}
+        isLoading={playerLeaderboardLoading}
+        title={player.title}
+        route={player.route}
+      />
+    </>
   );
 };
 
 export default LeaderBoardsPage;
+
+const player = {
+  title: "Pläääyerr",
+  route: `leaderboards/edit/player`,
+};

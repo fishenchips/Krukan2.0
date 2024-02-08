@@ -2,13 +2,24 @@ import { useRouter } from "next/router";
 import styles from "./Card.module.css";
 import { FaUserEdit } from "react-icons/fa";
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
+import { Loading } from "./Loading";
 
 interface Props {
   leaderboard: Array<LeaderBoardPlayer>;
+  isLoading: boolean;
+  title: string;
+  route: string;
 }
 
-export const CardComponent: React.FC<Props> = ({ leaderboard }) => {
+export const CardComponent: React.FC<Props> = ({
+  leaderboard,
+  isLoading,
+  title,
+  route,
+}) => {
   const { push } = useRouter();
+
+  if (isLoading) return <Loading />;
 
   if (!leaderboard) {
     return <p>No leaderboard active</p>;
@@ -31,11 +42,8 @@ export const CardComponent: React.FC<Props> = ({ leaderboard }) => {
     <div className={styles.card}>
       <div className={styles.header}>
         <h4 className={styles.title}>
-          Pläääyerr
-          <FaUserEdit
-            className={styles.editIcon}
-            onClick={() => push(`leaderboards/edit/player`)}
-          />
+          {title}
+          <FaUserEdit className={styles.editIcon} onClick={() => push(route)} />
         </h4>
       </div>
       <ul className={styles.list}>
