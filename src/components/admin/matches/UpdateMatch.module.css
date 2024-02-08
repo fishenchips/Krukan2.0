@@ -1,0 +1,15 @@
+.match {
+  display: flex;
+  margin: 10px 0;
+}
+
+.match a {
+  text-decoration: none;
+}
+
+.delete {
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 20px;
+  color: rgb(209, 30, 30);
+}

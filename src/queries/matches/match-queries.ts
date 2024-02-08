@@ -51,6 +51,9 @@ export const getMatches = async (): Promise<Array<ScheduledMatch>> => {
   return response.json();
 };
 
+export const getAllMatches = async (): Promise<Array<ScheduledMatch>> =>
+  (await fetch("api/matches/all-matches")).json();
+
 export const getMatchById = async (id: string): Promise<ScheduledMatch> => {
   const response = await fetch(`/api/matches/get-match/${id}`);
 
@@ -71,4 +74,14 @@ export const getNextMatch = async (): Promise<ScheduledMatch> => {
   const response = await fetch("/api/matches/next-match");
 
   return response.json();
+};
+
+export const deleteMatch = async (matchId: string): Promise<void> => {
+  await fetch(`/api/matches/delete/${matchId}`, {
+    method: "DELETE",
+    body: JSON.stringify(matchId),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };

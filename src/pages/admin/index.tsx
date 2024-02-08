@@ -1,16 +1,17 @@
 import { AdminLogin } from "@/components/admin/login";
 import { Loading } from "@/components/layout/Loading";
-import { useGetMatches } from "@/queries/matches/hooks/useGetMatches";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import cookieCutter from "cookie-cutter";
+import { useGetAllMatches } from "@/queries/matches/hooks/useGetAllMatches";
+import { UpdateMatchComponent } from "@/components/admin/matches/UpdateMatch";
 
 const AdminPage = () => {
   const [password, setPassword] = useState<string | undefined>("");
   const { data: session, status } = useSession();
 
-  const { data: matches, isLoading } = useGetMatches();
+  const { data: matches, isLoading } = useGetAllMatches();
 
   if (isLoading || status === "loading") {
     return <Loading />;
@@ -31,11 +32,7 @@ const AdminPage = () => {
                 <h5>Update match</h5>
                 {matches &&
                   matches.map((match) => (
-                    <div key={match._id}>
-                      <Link href={`/admin/update-match/${match._id}`}>
-                        {match.opposition} - {match.date}
-                      </Link>
-                    </div>
+                    <UpdateMatchComponent key={match._id} match={match} />
                   ))}
               </div>
             </div>
