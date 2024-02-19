@@ -12,6 +12,7 @@ import { RiAdminLine } from "react-icons/ri";
 import Link from "next/link";
 import { BiHome, BiFootball } from "react-icons/bi";
 import { useSession } from "next-auth/react";
+import { GiPodiumWinner } from "react-icons/gi";
 
 export const HamburgerMenu = () => {
   const { data: session } = useSession();
@@ -30,6 +31,9 @@ export const HamburgerMenu = () => {
         </MenuItem>
         <MenuItem icon={<BiFootball />} as={Link} href="/matches">
           Matches
+        </MenuItem>
+        <MenuItem icon={<GiPodiumWinner />} as={Link} href="/leaderboards">
+          Leaderboards
         </MenuItem>
         {session ? (
           ""
