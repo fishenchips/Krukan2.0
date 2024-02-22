@@ -5,6 +5,7 @@ import { LandingPage } from "@/components/layout/Home";
 import { SocialMedia } from "@/components/layout/SocialMedia";
 import { NextMatch } from "@/components/match/NextMatch";
 import { UserLandingPage } from "@/components/users/UserLandingPage";
+import { LinkComponent } from "@/components/layout/Link";
 
 const Home = () => {
   const { data: session } = useSession();
@@ -21,6 +22,12 @@ const Home = () => {
       </Head>
       <div>
         {session ? <UserLandingPage /> : <LandingPage />}
+        <LinkComponent
+          url={
+            "https://docs.google.com/document/d/1LfKt2QWIXLbU5tEcm8o3w37fBjbj4UBt3f5HbGN-x4I"
+          }
+          text={"Materialschema 2024"}
+        />
         <NextMatch />
         <SocialMedia />
       </div>
