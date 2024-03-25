@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, SyntheticEvent, useRef } from "react";
 import styled from "./index.module.css";
-import { Button } from "@/components/match/AttendMatch";
 import cookieCutter from "cookie-cutter";
+import { Button } from "@/components/layout/Button";
 
 interface Props {
   setPassword: Dispatch<SetStateAction<string | undefined>>;
@@ -37,7 +37,7 @@ export const AdminLogin: React.FC<Props> = ({ setPassword }) => {
           ref={passwordRef}
           onKeyDown={enterClick}
         />
-        <Button onClick={handleCheckAdmin}>Enter</Button>
+        <Button handleClick={handleCheckAdmin} text="Enter" />
       </div>
     </>
   );
