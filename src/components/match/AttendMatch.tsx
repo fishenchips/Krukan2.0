@@ -5,8 +5,8 @@ import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
 import { Roster } from "@/utils/types/match";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
-import styled from "styled-components";
 import { Loading } from "../layout/Loading";
+import { Button } from "../layout/Button";
 
 interface Props {
   matchId: string;
@@ -78,21 +78,10 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
   return (
     <div>
       {alreadyAttending ? (
-        <Button onClick={handleUnattendMatch}>Unattend match</Button>
+        <Button handleClick={handleUnattendMatch} text="Unattend match" />
       ) : (
-        <Button onClick={handleAttendMatch}>I can play!</Button>
+        <Button handleClick={handleAttendMatch} text="I can play!" />
       )}
     </div>
   );
 };
-
-export const Button = styled.button`
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  color: white;
-  font-size: 1.25rem;
-  font-weight: 700;
-  background-color: #80051b;
-  border-radius: 2rem;
-  border: none;
-`;

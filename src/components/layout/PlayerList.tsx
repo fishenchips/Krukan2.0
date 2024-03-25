@@ -4,7 +4,6 @@ import styles from "./PlayerList.module.css";
 import { useGetAllPlayers } from "@/queries/users/hooks/useGetAllPlayers";
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
 import { useUpdatePlayerLeaderboard } from "@/queries/leaderboards/player-leaderboard/hooks/useUpdatePlayerLeaderboard";
-import { Button } from "../match/AttendMatch";
 import {
   MdOutlineRemoveCircleOutline,
   MdOutlineAddCircleOutline,
@@ -12,6 +11,7 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { playerLeaderboardKey } from "@/queries/leaderboards/player-leaderboard/hooks/useGetPlayerLeaderboard";
 import { useToast } from "@chakra-ui/react";
+import { Button } from "./Button";
 
 export const PlayerList = () => {
   const queryClient = useQueryClient();
@@ -118,9 +118,7 @@ export const PlayerList = () => {
               </span>
             </div>
           ))}
-          <Button className={styles.button} onClick={handleSubmitPlayers}>
-            Send
-          </Button>
+          <Button handleClick={handleSubmitPlayers} text="Send" />
         </div>
       )}
     </div>
