@@ -28,6 +28,7 @@ const Home = () => {
           }
           text={"Materialschema 2024"}
         />
+        <LinkComponent url={"friskvard.pdf"} text={"Friskvårdsblankett"} />
         <NextMatch />
         <SocialMedia />
       </div>
