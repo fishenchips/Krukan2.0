@@ -15,12 +15,19 @@ const MatchPage = () => {
     query: { id },
     isReady,
   } = useRouter();
+
   const [prevMatch, setPrevMatch] = useState<AdjacentMatchType | undefined>();
   const [nextMatch, setNextMatch] = useState<AdjacentMatchType | undefined>();
 
   const { data: session } = useSession();
 
-  const { data: match, isLoading } = useGetMatchById(id as string);
+  const {
+    data: match,
+    isLoading,
+    refetch,
+  } = useGetMatchById(id as string, {
+    enabled: !!id,
+  });
 
   const { data: matches } = useGetMatches();
   const matchIndex = matches?.findIndex((m) => m._id === match?._id);
@@ -63,7 +70,11 @@ const MatchPage = () => {
       <AdjacentMatch prevMatch={prevMatch} nextMatch={nextMatch} />
       <MatchInfo match={match} />
       {session ? (
-        <AttendMatch matchId={id as string} roster={match.roster} />
+        <AttendMatch
+          matchId={id as string}
+          roster={match.roster}
+          refetch={refetch}
+        />
       ) : (
         <i style={{ color: "rgb(80, 80, 80)" }}>Log in to attend match</i>
       )}

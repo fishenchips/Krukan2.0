@@ -2,18 +2,27 @@ import { useAddPlayerToRoster } from "@/queries/matches/hooks/useAddPlayerToRost
 import { matchKey } from "@/queries/matches/hooks/useGetMatchById";
 import { useRemovePlayerFromRoster } from "@/queries/matches/hooks/useRemovePlayerFromRoster";
 import { useGetLoggedInUser } from "@/queries/users/hooks/useGetLoggedInUser";
-import { Roster } from "@/utils/types/match";
-import { useQueryClient } from "@tanstack/react-query";
+import { Roster, ScheduledMatch } from "@/utils/types/match";
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import styled from "styled-components";
 import { Loading } from "../layout/Loading";
+import { ApiError } from "@/utils/types/error";
 
 interface Props {
   matchId: string;
   roster?: Roster;
+  refetch: <TPageData>(
+    options?: (RefetchOptions & RefetchQueryFilters<TPageData>) | undefined
+  ) => Promise<QueryObserverResult<ScheduledMatch, ApiError>>;
 }
 
-export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
+export const AttendMatch: React.FC<Props> = ({ matchId, roster, refetch }) => {
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
@@ -39,7 +48,10 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
     },
     matchId,
     {
-      onSuccess: () => queryClient.invalidateQueries([matchKey, matchId]),
+      onSuccess: () => {
+        queryClient.invalidateQueries([matchKey, matchId]);
+        refetch();
+      },
     }
   );
 
@@ -55,7 +67,10 @@ export const AttendMatch: React.FC<Props> = ({ matchId, roster }) => {
     },
     matchId,
     {
-      onSuccess: () => queryClient.invalidateQueries([matchKey, matchId]),
+      onSuccess: () => {
+        queryClient.invalidateQueries([matchKey, matchId]);
+        refetch();
+      },
     }
   );
 
