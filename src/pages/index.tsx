@@ -24,7 +24,7 @@ const Home = () => {
         {session ? <UserLandingPage /> : <LandingPage />}
         <LinkComponent
           url={
-            "https://docs.google.com/document/d/1LfKt2QWIXLbU5tEcm8o3w37fBjbj4UBt3f5HbGN-x4I"
+            "https://docs.google.com/spreadsheets/d/1F2_436hN48Fcj2SZ-s1sGDUmpdRCcoVNtoEe1Jh68hw/edit#gid=0"
           }
           text={"Materialschema 2024"}
         />
