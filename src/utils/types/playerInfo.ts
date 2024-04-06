@@ -17,3 +17,9 @@ export interface LeaderBoardPlayer
   extends Omit<Player, "email" | "emailVerified"> {
   score: number;
 }
+
+export interface CardsLeaderBoardPlayer
+  extends Omit<Player, "email" | "emailVerified"> {
+  yellowCards: number;
+  redCards: number;
+}
