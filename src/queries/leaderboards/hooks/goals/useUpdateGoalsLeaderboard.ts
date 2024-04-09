@@ -1,12 +1,12 @@
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
 import { UseMutationOptions, useMutation } from "@tanstack/react-query";
-import { updatePlayerLeaderboard } from "../player-queries";
+import { updateGoalsLeaderboard } from "../../leaderboard-queries";
 
 export const useUpdatePlayerLeaderboard = (
   players: Array<LeaderBoardPlayer>,
   options?: UseMutationOptions
 ) =>
   useMutation({
-    mutationFn: () => updatePlayerLeaderboard(players),
+    mutationFn: () => updateGoalsLeaderboard(players),
     ...options,
   });

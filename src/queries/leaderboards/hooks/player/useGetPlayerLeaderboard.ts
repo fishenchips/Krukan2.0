@@ -1,5 +1,5 @@
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
-import { getPlayerLeaderboard } from "../player-queries";
+import { getPlayerLeaderboard } from "../../leaderboard-queries";
 
 export const playerLeaderboardKey = "player-leaderboard";
 

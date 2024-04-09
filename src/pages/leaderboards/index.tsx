@@ -1,6 +1,6 @@
 import { CardComponent } from "@/components/layout/Card";
 import { Loading } from "@/components/layout/Loading";
-import { useGetPlayerLeaderboard } from "@/queries/leaderboards/player-leaderboard/hooks/useGetPlayerLeaderboard";
+import { useGetPlayerLeaderboard } from "@/queries/leaderboards/hooks/player/useGetPlayerLeaderboard";
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
 
 const LeaderBoardsPage = () => {

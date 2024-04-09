@@ -1,12 +1,14 @@
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
 
+const leaderboardUrl = "/api/leaderboards";
+
 export const getPlayerLeaderboard = async () =>
-  (await fetch("/api/leaderboards/player")).json();
+  (await fetch(`${leaderboardUrl}/player`)).json();
 
 export const updatePlayerLeaderboard = async (
   players: Array<LeaderBoardPlayer>
 ): Promise<void> => {
-  const request = await fetch("/api/leaderboards/player/update", {
+  const request = await fetch(`${leaderboardUrl}/player/update`, {
     method: "PATCH",
     body: JSON.stringify(players),
     headers: {
@@ -18,12 +20,12 @@ export const updatePlayerLeaderboard = async (
 };
 
 export const getGoalsLeaderboard = async () =>
-  (await fetch("/api/leaderboards/goals")).json();
+  (await fetch(`${leaderboardUrl}/goals`)).json();
 
 export const updateGoalsLeaderboard = async (
   players: Array<LeaderBoardPlayer>
 ): Promise<void> => {
-  const request = await fetch("/api/leaderboards/goals/update", {
+  const request = await fetch(`${leaderboardUrl}/goals/update`, {
     method: "PATCH",
     body: JSON.stringify(players),
     headers: {
@@ -35,12 +37,12 @@ export const updateGoalsLeaderboard = async (
 };
 
 export const getAssistsLeaderboard = async () =>
-  (await fetch("/api/leaderboards/assists")).json();
+  (await fetch(`${leaderboardUrl}/assists`)).json();
 
 export const updateAssistsLeaderboard = async (
   players: Array<LeaderBoardPlayer>
 ): Promise<void> => {
-  const request = await fetch("/api/leaderboards/assists/update", {
+  const request = await fetch(`${leaderboardUrl}/assists/update`, {
     method: "PATCH",
     body: JSON.stringify(players),
     headers: {
@@ -52,12 +54,12 @@ export const updateAssistsLeaderboard = async (
 };
 
 export const getCardsLeaderboard = async () =>
-  (await fetch("/api/leaderboards/cards")).json();
+  (await fetch(`${leaderboardUrl}/cards`)).json();
 
 export const updateCardsLeaderboard = async (
   players: Array<LeaderBoardPlayer>
 ): Promise<void> => {
-  const request = await fetch("/api/leaderboards/cards/update", {
+  const request = await fetch(`${leaderboardUrl}/cards/update`, {
     method: "PATCH",
     body: JSON.stringify(players),
     headers: {

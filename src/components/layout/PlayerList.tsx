@@ -3,14 +3,14 @@ import styles from "./PlayerList.module.css";
 
 import { useGetAllPlayers } from "@/queries/users/hooks/useGetAllPlayers";
 import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
-import { useUpdatePlayerLeaderboard } from "@/queries/leaderboards/player-leaderboard/hooks/useUpdatePlayerLeaderboard";
+import { useUpdatePlayerLeaderboard } from "@/queries/leaderboards/hooks/player/useUpdatePlayerLeaderboard";
 import { Button } from "../match/AttendMatch";
 import {
   MdOutlineRemoveCircleOutline,
   MdOutlineAddCircleOutline,
 } from "react-icons/md";
 import { useQueryClient } from "@tanstack/react-query";
-import { playerLeaderboardKey } from "@/queries/leaderboards/player-leaderboard/hooks/useGetPlayerLeaderboard";
+import { playerLeaderboardKey } from "@/queries/leaderboards/hooks/player/useGetPlayerLeaderboard";
 import { useToast } from "@chakra-ui/react";
 
 export const PlayerList = () => {
