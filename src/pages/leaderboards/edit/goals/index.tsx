@@ -4,10 +4,10 @@ import { useSession } from "next-auth/react";
 import { useState } from "react";
 import cookieCutter from "cookie-cutter";
 import { AdminLogin } from "@/components/admin/login";
-import { useUpdatePlayerLeaderboard } from "@/queries/leaderboards/hooks/player/useUpdatePlayerLeaderboard";
-import { playerLeaderboardKey } from "@/queries/leaderboards/hooks/player/useGetPlayerLeaderboard";
+import { useUpdateGoalsLeaderboard } from "@/queries/leaderboards/hooks/goals/useUpdateGoalsLeaderboard";
+import { goalsLeaderboardKey } from "@/queries/leaderboards/hooks/goals/useGetGoalsLeaderboard";
 
-const EditPlayerLeaderboardPage = () => {
+const EditGoalsLeaderboardPage = () => {
   const [password, setPassword] = useState<string | undefined>("");
   const { status } = useSession();
 
@@ -22,8 +22,8 @@ const EditPlayerLeaderboardPage = () => {
       {password === process.env.NEXT_PUBLIC_ADMIN_PASSWORD ||
       cookieCutter.get("isAdmin") ? (
         <PlayerList
-          mutation={useUpdatePlayerLeaderboard}
-          key={playerLeaderboardKey}
+          mutation={useUpdateGoalsLeaderboard}
+          key={goalsLeaderboardKey}
         />
       ) : (
         <AdminLogin setPassword={setPassword} />
@@ -31,4 +31,4 @@ const EditPlayerLeaderboardPage = () => {
     </>
   );
 };
-export default EditPlayerLeaderboardPage;
+export default EditGoalsLeaderboardPage;

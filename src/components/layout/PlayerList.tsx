@@ -9,22 +9,36 @@ import {
   MdOutlineRemoveCircleOutline,
   MdOutlineAddCircleOutline,
 } from "react-icons/md";
-import { useQueryClient } from "@tanstack/react-query";
+import {
+  UseMutationOptions,
+  UseMutationResult,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { playerLeaderboardKey } from "@/queries/leaderboards/hooks/player/useGetPlayerLeaderboard";
 import { useToast } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
-export const PlayerList = () => {
+interface Props {
+  mutation: (
+    players: LeaderBoardPlayer[],
+    options?: UseMutationOptions<unknown, unknown, void, unknown> | undefined
+  ) => UseMutationResult<unknown, unknown, void, unknown>;
+  key: string;
+}
+
+export const PlayerList: React.FC<Props> = ({ mutation, key }) => {
   const queryClient = useQueryClient();
   const toast = useToast();
+  const { push } = useRouter();
 
   const [playersToAdd, setPlayersToAdd] = useState<Array<LeaderBoardPlayer>>(
     []
   );
   const { data: players, isLoading } = useGetAllPlayers();
 
-  const { mutate } = useUpdatePlayerLeaderboard(playersToAdd, {
+  const { mutate } = mutation(playersToAdd, {
     onSuccess: () => {
-      queryClient.invalidateQueries([playerLeaderboardKey]);
+      queryClient.invalidateQueries([key]);
       setPlayersToAdd([]);
       toast({
         title: "Players added",
@@ -69,6 +83,7 @@ export const PlayerList = () => {
 
   const handleSubmitPlayers = (): void => {
     mutate();
+    push("/leaderboards");
   };
 
   return (
