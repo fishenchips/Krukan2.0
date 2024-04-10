@@ -1,13 +1,13 @@
 import { useRouter } from "next/router";
 import styles from "./Card.module.css";
 import { FaUserEdit } from "react-icons/fa";
-import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
+import { CardsLeaderBoardPlayer } from "@/utils/types/playerInfo";
 import { Loading } from "./Loading";
 import { Dispatch, SetStateAction } from "react";
 import { IoIosArrowDropdown, IoIosArrowDropright } from "react-icons/io";
 
 interface Props {
-  leaderboard: Array<LeaderBoardPlayer>;
+  leaderboard: Array<CardsLeaderBoardPlayer>;
   isLoading: boolean;
   title: string;
   route: string;
@@ -15,7 +15,7 @@ interface Props {
   setIsExpanded: Dispatch<SetStateAction<boolean>>;
 }
 
-export const CardComponent: React.FC<Props> = ({
+export const WarningsComponent: React.FC<Props> = ({
   leaderboard,
   isLoading,
   title,
@@ -30,19 +30,6 @@ export const CardComponent: React.FC<Props> = ({
   if (!leaderboard) {
     return <p>No leaderboard active</p>;
   }
-
-  const scoreClass = (rank: number) => {
-    switch (rank) {
-      case 1:
-        return styles.gold;
-      case 2:
-        return styles.silver;
-      case 3:
-        return styles.bronze;
-      default:
-        return styles.score;
-    }
-  };
 
   return (
     <div className={styles.card}>
@@ -72,7 +59,8 @@ export const CardComponent: React.FC<Props> = ({
               <span className={styles.playerName}>
                 {player.info.firstName} {player.info.lastName}
               </span>
-              <span className={scoreClass(i + 1)}>{player.score}</span>
+              <span className={styles.yellow}>{player.yellowCards}</span>
+              <span className={styles.red}>{player.redCards}</span>
             </li>
           )
         )}

@@ -1,4 +1,7 @@
-import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
+import {
+  CardsLeaderBoardPlayer,
+  LeaderBoardPlayer,
+} from "@/utils/types/playerInfo";
 
 const leaderboardUrl = "/api/leaderboards";
 
@@ -57,7 +60,7 @@ export const getCardsLeaderboard = async () =>
   (await fetch(`${leaderboardUrl}/cards`)).json();
 
 export const updateCardsLeaderboard = async (
-  players: Array<LeaderBoardPlayer>
+  players: Array<CardsLeaderBoardPlayer>
 ): Promise<void> => {
   const request = await fetch(`${leaderboardUrl}/cards/update`, {
     method: "PATCH",

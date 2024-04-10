@@ -1,3 +1,9 @@
+.cards {
+  width: 80vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .card {
   background-color: #fff;
   border-radius: 8px;
@@ -67,4 +73,20 @@
 .bronze {
   font-weight: bold;
   color: #cd7f32;
+}
+
+.yellow {
+  background-color: rgb(243, 243, 52);
+  font-weight: bold;
+  color: black;
+}
+
+.red {
+  background-color: rgb(237, 12, 12);
+  font-weight: bold;
+  color: black;
+}
+
+.showMoreLess {
+  cursor: pointer;
 }

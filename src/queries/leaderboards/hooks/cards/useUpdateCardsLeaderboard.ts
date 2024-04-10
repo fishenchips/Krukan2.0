@@ -1,9 +1,12 @@
-import { LeaderBoardPlayer } from "@/utils/types/playerInfo";
+import {
+  CardsLeaderBoardPlayer,
+  LeaderBoardPlayer,
+} from "@/utils/types/playerInfo";
 import { UseMutationOptions, useMutation } from "@tanstack/react-query";
 import { updateCardsLeaderboard } from "../../leaderboard-queries";
 
-export const useUpdatePlayerLeaderboard = (
-  players: Array<LeaderBoardPlayer>,
+export const useUpdateCardsLeaderboard = (
+  players: Array<CardsLeaderBoardPlayer>,
   options?: UseMutationOptions
 ) =>
   useMutation({

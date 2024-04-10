@@ -3,7 +3,7 @@ import { getCardsLeaderboard } from "../../leaderboard-queries";
 
 export const cardsLeaderboardKey = "cards-leaderboard";
 
-export const useGetPlayerLeaderboard = (options?: UseQueryOptions) =>
+export const useGetCardsLeaderboard = (options?: UseQueryOptions) =>
   useQuery({
     queryKey: [cardsLeaderboardKey],
     queryFn: () => getCardsLeaderboard(),

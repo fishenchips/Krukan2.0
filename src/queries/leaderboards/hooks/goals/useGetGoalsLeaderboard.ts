@@ -3,7 +3,7 @@ import { getGoalsLeaderboard } from "../../leaderboard-queries";
 
 export const goalsLeaderboardKey = "goals-leaderboard";
 
-export const useGetPlayerLeaderboard = (options?: UseQueryOptions) =>
+export const useGetGoalsLeaderboard = (options?: UseQueryOptions) =>
   useQuery({
     queryKey: [goalsLeaderboardKey],
     queryFn: () => getGoalsLeaderboard(),
