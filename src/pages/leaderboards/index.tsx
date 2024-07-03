@@ -56,14 +56,14 @@ const LeaderBoardsPage = () => {
         isExpanded={expandAssists}
         setIsExpanded={setExpandAssists}
       />
-      <WarningsComponent
+      {/* <WarningsComponent
         leaderboard={cardsLeaderboard as CardsLeaderBoardPlayer[]}
         isLoading={cardsLeaderboardLoading}
         title={cards.title}
         route={cards.route}
         isExpanded={expandCards}
         setIsExpanded={setExpandCards}
-      />
+      /> */}
     </div>
   );
 };
