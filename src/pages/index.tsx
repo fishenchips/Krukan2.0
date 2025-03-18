@@ -26,7 +26,7 @@ const Home = () => {
           url={
             "https://docs.google.com/spreadsheets/d/1F2_436hN48Fcj2SZ-s1sGDUmpdRCcoVNtoEe1Jh68hw/edit#gid=0"
           }
-          text={"Materialschema 2024"}
+          text={"Materialschema"}
         />
         <LinkComponent url={"friskvard.pdf"} text={"Friskvårdsblankett"} />
         <NextMatch />
