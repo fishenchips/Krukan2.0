@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/core": "^0.40.0",
     "@auth/mongodb-adapter": "^3.10.0",
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
