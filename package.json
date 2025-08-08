@@ -11,7 +11,7 @@
   "dependencies": {
     "@auth/core": "^0.40.0",
     "@auth/mongodb-adapter": "^3.10.0",
-    "@chakra-ui/react": "^2.5.1",
+    "@chakra-ui/react": "3.24.2",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@next/font": "13.3.0",
