@@ -1,7 +1,8 @@
 import NextAuth from "next-auth/next";
 import EmailProvider from "next-auth/providers/email";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodb";
+import { Adapter } from "next-auth/adapters";
 
 export default NextAuth({
   providers: [
@@ -20,6 +21,6 @@ export default NextAuth({
   pages: {
     signIn: "/auth/signin",
   },
-  adapter: MongoDBAdapter(clientPromise),
+  adapter: MongoDBAdapter(clientPromise) as Adapter,
   secret: process.env.NEXTAUTH_SECRET,
 });
