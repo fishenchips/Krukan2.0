@@ -24,7 +24,7 @@
     "cookie-cutter": "^0.2.0",
     "dayjs": "^1.11.7",
     "eslint": "9.32.0",
-    "eslint-config-next": "15.4.36",
+    "eslint-config-next": "14.2.31",
     "framer-motion": "12.23.12",
     "mongodb": "6.18.0",
     "next": "^14.2.31",
